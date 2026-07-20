@@ -1,0 +1,3176 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan Kelurahan Watang Soreang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233B;
+    --paper:#F4F6F9;
+    --paper-soft:#FFFFFF;
+    --teal-deep:#0B2A55;
+    --teal:#163E77;
+    --sea:#6F8FBF;
+    --amber:#D4A017;
+    --amber-deep:#A9800E;
+    --line:#DDE2EA;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+
+  /* ---- Header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--teal-deep);
+    color:var(--paper-soft);
+  }
+  .header-top{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:16px 24px;max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand-mark{width:46px;height:46px;flex:none;}
+  .brand-text{line-height:1.25;}
+  .brand-text .name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;letter-spacing:.01em;text-transform:uppercase;}
+  .brand-text .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-top:4px;}
+  .header-actions{display:flex;gap:10px;flex:none;}
+  .btn-mini{
+    padding:10px 20px;border-radius:8px;font-weight:700;font-size:13px;letter-spacing:.03em;
+    background:var(--amber);color:var(--teal-deep);border:none;
+  }
+  .btn-mini:hover{background:var(--amber-deep);}
+  .btn-mini.outline{background:transparent;color:var(--paper-soft);border:1px solid rgba(245,238,221,.4);}
+  .header-nav-row{background:rgba(0,0,0,.18);border-top:2px solid var(--amber);}
+  nav{display:flex;gap:22px;font-size:13.5px;font-weight:500;max-width:1120px;margin:0 auto;padding:12px 24px;flex-wrap:wrap;}
+  nav a{text-decoration:none;opacity:.85;padding:4px 2px;border-bottom:2px solid transparent;transition:opacity .2s,border-color .2s;}
+  nav a:hover{opacity:1;border-color:var(--amber);}
+  nav a.active{opacity:1;border-color:var(--amber);color:var(--amber);}
+  .nav-toggle{display:none;background:none;border:1px solid rgba(245,238,221,.4);color:var(--paper-soft);border-radius:8px;padding:8px 10px;}
+  @media (max-width:860px){
+    .header-nav-row nav{position:absolute;top:100%;left:0;right:0;background:var(--teal-deep);flex-direction:column;padding:14px 24px 20px;gap:14px;display:none;}
+    .header-nav-row nav.open{display:flex;}
+    .header-nav-row{position:relative;}
+    .nav-toggle{display:block;}
+    .header-actions .btn-mini{padding:8px 14px;font-size:12px;}
+  }
+
+  /* ---- Hero v2 (mockup match) ---- */
+  .hero{
+    position:relative;
+    background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);
+    color:var(--paper-soft);
+    padding:56px 0 48px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.3fr .8fr;gap:40px;align-items:start;
+  }
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;line-height:1.18;margin:0 0 16px;text-transform:uppercase;letter-spacing:.01em;}
+  .hero p.lead{font-size:15.5px;color:#D9E2F0;max-width:540px;margin:0 0 26px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:999px;font-weight:600;font-size:14.5px;
+    border:1px solid transparent;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-amber{background:var(--amber);color:var(--teal-deep);}
+  .btn-amber:hover{background:var(--amber-deep);}
+  .btn-ghost{background:transparent;color:var(--paper-soft);border-color:rgba(245,238,221,.4);}
+  .btn-ghost:hover{border-color:var(--amber);}
+  .btn-dark{background:var(--teal-deep);color:var(--paper-soft);}
+  .btn-dark:hover{background:var(--ink);}
+
+  .spbe-box{
+    border:1.5px dashed var(--amber);border-radius:12px;padding:20px 22px;text-align:center;
+    background:rgba(212,160,23,.06);
+  }
+  .spbe-box .tag{font-size:12.5px;font-weight:800;color:var(--amber);letter-spacing:.06em;margin-bottom:8px;}
+  .spbe-box p{font-size:13px;color:#D9E2F0;margin:0;line-height:1.5;}
+
+  .feature-row-wrap{background:var(--paper-soft);border-top:3px solid var(--amber);}
+  .feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:36px 0 4px;}
+  @media (max-width:820px){.feature-row{grid-template-columns:1fr;gap:28px;padding:32px 0;}}
+  .feature-card{padding:0 28px;border-left:1px solid var(--line);}
+  .feature-card:first-child{border-left:none;padding-left:0;}
+  @media (max-width:820px){.feature-card{border-left:none;padding:0;}}
+  .feature-card .flabel{font-size:16px;font-weight:800;margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+  .feature-card p{font-size:13.5px;color:#4B5A72;margin:0 0 16px;min-height:66px;}
+  @media (max-width:820px){.feature-card p{min-height:0;}}
+
+  .priority-wrap{padding:52px 0 68px;}
+  .priority-head{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .priority-head .bar{width:5px;height:26px;background:var(--amber);border-radius:3px;}
+  .priority-head h2{font-size:19px;font-weight:800;margin:0;}
+  .priority-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:960px){.priority-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.priority-grid{grid-template-columns:1fr;}}
+  .priority-card{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;
+    padding:20px;text-align:center;display:flex;flex-direction:column;
+  }
+  .priority-card h3{font-size:14.5px;font-weight:800;margin:0 0 8px;line-height:1.3;}
+  .priority-card .time{font-size:12px;font-weight:700;color:#1F8A4C;margin-bottom:10px;}
+  .priority-card p{font-size:12.5px;color:#5B6A80;margin:0 0 16px;flex:1;}
+  .btn-outline-navy{
+    border:1.5px solid var(--teal-deep);color:var(--teal-deep);background:transparent;
+    padding:9px 16px;border-radius:8px;font-weight:700;font-size:13px;
+  }
+  .btn-outline-navy:hover{background:var(--teal-deep);color:var(--white);}
+
+  /* ---- Page navigation ---- */
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---- Section shell ---- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin:0 0 44px;}
+  .section-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin-bottom:10px;}
+  .section-head h2{font-size:clamp(24px,3vw,32px);font-weight:600;margin:0 0 12px;}
+  .section-head p{color:#3E5652;max-width:560px;}
+
+  /* ---- Alur (steps) ---- */
+  .steps{background:var(--paper-soft);}
+  .step-row{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  @media (max-width:960px){.step-row{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:560px){.step-row{grid-template-columns:1fr 1fr;}}
+  .step{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 16px;position:relative;
+  }
+  .step .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber-deep);font-weight:600;}
+  .step h3{font-size:15px;margin:10px 0 6px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;}
+  .step p{font-size:13px;color:#556865;margin:0;}
+
+  /* ---- Persyaratan umum ---- */
+  .req-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:760px){.req-grid{grid-template-columns:1fr;}}
+  .req-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .req-card .icon{width:40px;height:40px;flex:none;color:var(--teal);}
+  .req-card h3{margin:0 0 6px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;}
+  .req-card p{margin:0;font-size:13.5px;color:#556865;}
+
+  /* ---- Layanan grid ---- */
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:960px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;text-align:left;display:flex;flex-direction:column;gap:12px;
+    transition:border-color .18s, transform .18s, box-shadow .18s;
+  }
+  .service-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 10px 24px -14px rgba(14,59,58,.35);}
+  .service-card .icon{width:30px;height:30px;color:var(--teal);}
+  .service-card h3{margin:0;font-size:14.5px;font-weight:700;line-height:1.35;}
+  .service-card .go{
+    margin-top:auto;font-size:12.5px;font-weight:700;color:var(--amber-deep);
+    display:flex;align-items:center;gap:6px;
+  }
+
+  /* ---- Upload ---- */
+  .upload-panel{
+    background:var(--teal-deep);color:var(--paper-soft);border-radius:20px;
+    padding:40px;display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;
+  }
+  @media (max-width:860px){.upload-panel{grid-template-columns:1fr;padding:28px;}}
+  .upload-panel h2{color:var(--paper-soft);}
+  .upload-panel .section-eyebrow{color:var(--amber);}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#CFE3DF;}
+  select,textarea,input[type=text]{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid rgba(245,238,221,.25);
+    background:rgba(245,238,221,.06);color:var(--paper-soft);font-family:inherit;font-size:14px;
+  }
+  select option{color:#111;}
+  .dropzone{
+    border:1.5px dashed rgba(245,238,221,.4);border-radius:14px;padding:26px 18px;text-align:center;
+    background:rgba(245,238,221,.04);transition:border-color .2s,background .2s;
+  }
+  .dropzone.drag{border-color:var(--amber);background:rgba(227,161,59,.1);}
+  .dropzone p{margin:8px 0 0;font-size:13px;color:#CFE3DF;}
+  .filelist{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px;}
+  .filelist li{
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(245,238,221,.08);border-radius:9px;padding:9px 12px;font-size:12.5px;
+  }
+  .filelist button{background:none;border:none;color:#E7A9A0;font-weight:700;font-size:13px;}
+  .req-hint{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .chip{
+    font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:999px;
+    background:rgba(227,161,59,.15);color:var(--amber);border:1px solid rgba(227,161,59,.35);
+  }
+  .ticket-msg{
+    margin-top:16px;padding:14px 16px;border-radius:12px;background:rgba(111,166,157,.18);
+    border:1px solid rgba(111,166,157,.4);font-size:13.5px;display:none;
+  }
+  .ticket-msg.show{display:block;}
+  .ticket-msg .mono{color:var(--amber);}
+
+  /* ---- Aspirasi ---- */
+  .aspirasi-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;}
+  @media (max-width:860px){.aspirasi-grid{grid-template-columns:1fr;}}
+  .form-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+  .form-card label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  .form-card select,.form-card textarea,.form-card input[type=text]{
+    border:1px solid var(--line);background:var(--paper-soft);color:var(--ink);
+  }
+  .feed{display:flex;flex-direction:column;gap:12px;max-height:420px;overflow:auto;padding-right:4px;}
+  .feed-item{
+    background:var(--white);border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 16px;font-size:13.5px;
+  }
+  .feed-item .meta{font-size:11.5px;color:#7A8C89;margin-bottom:4px;display:flex;gap:8px;}
+  .feed-empty{font-size:13px;color:#7A8C89;font-style:italic;}
+
+  /* ---- Footer ---- */
+  footer{background:#111827;color:#CBD5E1;padding:16px 0;margin-top:0;}
+  .footer-bottom{font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .footer-bottom b{color:#fff;font-weight:700;}
+
+  /* ======== Admin TTE Dashboard ======== */
+  #admin{background:var(--paper);}
+  .admin-header{background:var(--teal-deep);color:#fff;padding:14px 24px;}
+  .admin-header-inner{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;}
+  .admin-brand{display:flex;align-items:center;gap:12px;}
+  .admin-brand svg{width:36px;height:36px;flex:none;}
+  .admin-brand .name{font-weight:800;font-size:14.5px;letter-spacing:.01em;}
+  .admin-brand .eyebrow{font-size:10.5px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+  .admin-user{display:flex;align-items:center;gap:14px;font-size:13px;flex-wrap:wrap;}
+  .admin-user .who b{color:#fff;}
+  .badge-queue{background:#D64545;color:#fff;padding:6px 13px;border-radius:999px;font-weight:800;font-size:12px;white-space:nowrap;}
+  .btn-keluar{background:var(--amber);color:var(--teal-deep);border:none;padding:9px 20px;border-radius:8px;font-weight:800;font-size:13px;}
+  .btn-keluar:hover{background:var(--amber-deep);}
+
+  .admin-strip{background:#0E356B;color:#D9E2F0;font-size:12px;padding:9px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;max-width:1400px;margin:0 auto;}
+  .dot-live{width:8px;height:8px;border-radius:50%;background:#3ECF6E;display:inline-block;margin-right:6px;}
+
+  .admin-body{display:flex;max-width:1400px;margin:0 auto;align-items:flex-start;}
+  .admin-sidebar{width:230px;flex:none;padding:20px 14px;background:#fff;border-right:1px solid var(--line);min-height:70vh;}
+  @media (max-width:900px){.admin-sidebar{display:none;}}
+  .admin-sidebar h5{font-size:10.5px;letter-spacing:.1em;color:#8792A6;text-transform:uppercase;margin:0 0 12px;padding:0 6px;}
+  .admin-menu-item{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#374357;cursor:pointer;margin-bottom:4px;}
+  .admin-menu-item:hover{background:#F1F4F9;}
+  .admin-menu-item.active{background:var(--amber);color:var(--teal-deep);}
+  .admin-menu-item .count{background:rgba(0,0,0,.1);padding:2px 8px;border-radius:999px;font-size:11px;}
+  .admin-menu-item.active .count{background:rgba(255,255,255,.55);}
+  .admin-side-note{margin-top:18px;background:var(--teal-deep);color:#D9E2F0;border-radius:10px;padding:14px;font-size:11.5px;line-height:1.65;}
+  .admin-side-note b{color:var(--amber);}
+
+  .admin-main{flex:1;padding:24px;min-width:0;}
+  .admin-main-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
+  .admin-main-head h2{margin:0 0 4px;font-size:19px;}
+  .admin-main-head p{margin:0;font-size:13px;color:#5B6A80;max-width:560px;}
+  .admin-datebadge{background:var(--teal-deep);color:#fff;padding:9px 14px;border-radius:8px;font-size:12px;font-weight:700;white-space:nowrap;}
+
+  .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
+  @media (max-width:900px){.admin-stats{grid-template-columns:repeat(2,1fr);}}
+  .stat-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;}
+  .stat-card .num{font-size:21px;font-weight:800;line-height:1.1;}
+  .stat-card .label{font-size:11px;color:#5B6A80;}
+  .stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;}
+
+  .admin-banner{background:#E9F8EE;border:1px solid #BEE9CB;color:#1F5B34;border-radius:10px;padding:13px 16px;font-size:13px;margin-bottom:20px;line-height:1.55;}
+
+  .admin-cols{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;margin-bottom:20px;}
+  @media (max-width:980px){.admin-cols{grid-template-columns:1fr;}}
+  .queue-panel,.preview-panel,.history-panel{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .panel-head{padding:13px 16px;border-bottom:1px solid var(--line);font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+  .chip-count{background:var(--amber);color:var(--teal-deep);font-size:11px;padding:3px 10px;border-radius:999px;font-weight:800;}
+  .queue-list{max-height:520px;overflow:auto;}
+  .queue-item{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start;cursor:pointer;}
+  .queue-item:hover{background:#F7F9FC;}
+  .queue-item.selected{background:#FFF7E6;}
+  .queue-num{width:23px;height:23px;border-radius:50%;background:var(--teal-deep);color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+  .queue-item .qi-body{flex:1;min-width:0;}
+  .queue-item .qi-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .queue-item .qi-name{font-weight:800;font-size:13px;}
+  .queue-item .qi-jenis{font-size:12px;color:#374357;margin-top:1px;}
+  .queue-item .qi-meta{font-size:11px;color:#7A8AA0;margin-top:3px;}
+  .status-pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;}
+  .status-pill.siap{background:#E3F6E9;color:#1F8A4C;}
+  .status-pill.menunggu{background:#FFF2D6;color:#A9800E;}
+  .status-pill.selesai{background:#E3F6E9;color:#1F8A4C;}
+  .status-pill.dikembalikan{background:#FCE4E4;color:#B3261E;}
+
+  .doc-preview{padding:20px;font-size:12px;color:#20304D;max-height:520px;overflow:auto;}
+  .letterhead{display:flex;gap:12px;border-bottom:2px solid var(--teal-deep);padding-bottom:12px;margin-bottom:14px;align-items:center;}
+  .letterhead svg{width:38px;height:38px;flex:none;}
+  .letterhead b{display:block;font-size:12px;}
+  .doc-title{text-align:center;font-weight:800;font-size:13.5px;text-decoration:underline;margin:16px 0 4px;}
+  .doc-num{text-align:center;font-size:11px;color:#7A8AA0;margin-bottom:16px;}
+  .doc-field{display:grid;grid-template-columns:130px 10px 1fr;gap:2px;font-size:12px;margin-bottom:5px;}
+  .doc-field b{font-weight:700;}
+  .sign-box{margin-top:20px;border:1.5px solid #BEE9CB;background:#F3FBF5;border-radius:10px;padding:14px;text-align:center;}
+  .sign-box .st{font-size:10.5px;font-weight:800;color:#1F8A4C;letter-spacing:.03em;}
+  .sign-box .who{font-weight:800;font-size:13px;margin-top:4px;}
+  .sign-box .meta{font-size:10.5px;color:#5B6A80;margin-top:2px;}
+
+  .sign-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px;position:relative;}
+  .sign-panel-title{font-weight:800;font-size:14px;margin-bottom:14px;}
+  .sign-panel-top{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+  @media (max-width:760px){.sign-panel-top{grid-template-columns:1fr;}}
+  .sp-box{background:#F7F9FC;border-radius:10px;padding:12px 14px;}
+  .sp-box .l{font-size:10px;color:#7A8AA0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .sp-box .v{font-weight:800;font-size:13px;}
+
+  .alur-box{border:1.5px dashed var(--amber);border-radius:12px;padding:18px;text-align:center;margin-bottom:18px;background:rgba(212,160,23,.05);}
+  .alur-box .title{font-weight:800;font-size:13px;margin-bottom:4px;}
+  .alur-box .sub{font-size:11.5px;color:#5B6A80;margin-bottom:14px;line-height:1.5;}
+  .alur-steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+  .alur-step{font-size:11px;font-weight:800;padding:6px 12px;border-radius:999px;}
+  .alur-step.done{background:#E3F6E9;color:#1F8A4C;}
+  .alur-step.current{background:var(--amber);color:var(--teal-deep);}
+  .alur-step.next{background:#EEF1F5;color:#8792A6;}
+
+  .sign-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .sign-actions button{font-family:inherit;border-radius:10px;font-weight:800;padding:15px 18px;font-size:13px;cursor:pointer;}
+  .btn-sign-now{flex:1.4;background:var(--teal-deep);color:#fff;border:none;min-width:240px;}
+  .btn-sign-now:hover{background:var(--ink);}
+  .btn-sign-now:disabled{opacity:.5;cursor:not-allowed;}
+  .btn-skip{flex:1;background:var(--amber);color:var(--teal-deep);border:none;min-width:180px;}
+  .btn-skip:hover{background:var(--amber-deep);}
+  .btn-return{flex:1;background:#fff;color:#B3261E;border:1.5px solid #F1B7B3;min-width:180px;}
+  .btn-return:hover{background:#FDEDEC;}
+
+  .sign-toast{
+    position:absolute;top:-14px;left:20px;right:20px;background:#1F8A4C;color:#fff;border-radius:10px;
+    padding:12px 16px;font-size:13px;font-weight:600;box-shadow:0 10px 24px -10px rgba(31,138,76,.5);
+    display:none;z-index:5;
+  }
+  .sign-toast.show{display:block;}
+
+  table.riwayat{width:100%;border-collapse:collapse;font-size:12px;}
+  table.riwayat th{text-align:left;background:#F7F9FC;padding:10px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#7A8AA0;}
+  table.riwayat td{padding:11px 14px;border-top:1px solid var(--line);}
+
+  .placeholder-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:50px 30px;text-align:center;color:#5B6A80;font-size:14px;line-height:1.7;}
+  .placeholder-panel .pico{font-size:30px;display:block;margin-bottom:10px;}
+  .placeholder-panel b{color:var(--ink);font-size:15.5px;}
+
+  /* Modal */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(14,26,25,.55);display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:100;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{background:var(--white);border-radius:16px;max-width:460px;width:100%;padding:28px;position:relative;}
+  .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;color:#7A8C89;}
+  .modal h3{margin:0 0 6px;font-size:19px;}
+  .modal .modal-tag{font-size:12px;color:var(--amber-deep);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+  .modal input[type=text],.modal input[type=email],.modal input[type=password]{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--line);
+    background:var(--paper-soft);color:var(--ink);font-family:inherit;font-size:14px;
+  }
+  .modal .field{margin-bottom:14px;}
+  .modal .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .auth-tabs{display:flex;gap:8px;margin-bottom:18px;background:var(--paper);border-radius:10px;padding:4px;}
+  .auth-tab{flex:1;background:none;border:none;padding:9px;border-radius:8px;font-weight:700;font-size:13px;color:#7A8C99;}
+  .auth-tab.active{background:var(--teal-deep);color:#fff;}
+  .auth-error{font-size:12.5px;padding:10px 12px;border-radius:8px;background:#FFF3F4;margin-bottom:14px;}
+  .user-badge{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
+  .modal ul{margin:14px 0 22px;padding-left:18px;font-size:13.5px;color:#3E5652;}
+  .modal ul li{margin-bottom:5px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 46 46" fill="none">
+        <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/>
+        <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="none" stroke="#D4A017" stroke-width="1.6"/>
+        <path d="M11 24c3.5-7 8-11 12-11s8.5 4 12 11" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M9 30c4-6.5 9-10 14-10s10 3.5 14 10" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" opacity=".5" fill="none"/>
+        <path d="M23 9 L25.2 14.2 L30.8 14.6 L26.5 18.2 L27.9 23.6 L23 20.6 L18.1 23.6 L19.5 18.2 L15.2 14.6 L20.8 14.2 Z" fill="#D4A017"/>
+      </svg>
+      <div class="brand-text">
+        <div class="name">Portal Pelayanan Publik<br>Kelurahan Watang Soreang</div>
+        <div class="eyebrow">Pemerintah Kota Parepare • Sistem Pemerintahan Berbasis Elektronik (SPBE)</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-mini" id="btnLogin" type="button">Login</button>
+      <button class="btn-mini" id="btnSignup" type="button">Sign Up</button>
+      <span class="user-badge" id="userBadge" style="display:none;">
+        <span id="userBadgeName"></span>
+        <button class="btn-mini outline" id="btnLogout" type="button">Keluar</button>
+      </span>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+    </div>
+  </div>
+  <div class="header-nav-row">
+    <nav id="nav">
+      <a href="#" data-page="beranda" class="nav-link active">Beranda</a>
+      <a href="#" data-page="alur" class="nav-link">Alur Layanan</a>
+      <a href="#" data-page="persyaratan" class="nav-link">Persyaratan</a>
+      <a href="#" data-page="layanan" class="nav-link">Layanan Surat</a>
+      <a href="#" data-page="unggah" class="nav-link">Unggah Berkas</a>
+      <a href="#" data-page="aspirasi" class="nav-link">Aspirasi</a>
+      <a href="#" id="navTTE" class="nav-link" style="display:none;">Tanda Tangan Digital (Kepala Lurah)</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page active" id="beranda">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Layanan surat mudah dan cepat dari rumah</h1>
+      <p class="lead">Memotong rantai birokrasi konvensional. Urus berkas administrasi persuratan Anda secara mandiri melalui sistem online tanpa perlu datang bolak-balik hanya untuk menanyakan persyaratan.</p>
+      <div class="hero-actions">
+        <a href="#" data-page="layanan" class="btn btn-amber">Mulai Pengajuan Online →</a>
+      </div>
+    </div>
+    <div class="spbe-box">
+      <div class="tag">Integrasi SPBE</div>
+      <p>Otomatisasi Sistem Berbasis Tanda Tangan Elektronik (TTE)</p>
+    </div>
+  </div>
+</section>
+
+<div class="feature-row-wrap">
+  <div class="wrap feature-row">
+    <div class="feature-card">
+      <div class="flabel">🗂️ 1. Katalog &amp; Syarat Surat</div>
+      <p>Transparansi dokumen persyaratan (KTP, KK, Pengantar RT/RW) serta unduhan formulir pernyataan agar berkas lengkap sekali datang.</p>
+      <a href="#" data-page="persyaratan" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Buka Katalog Syarat</a>
+    </div>
+    <div class="feature-card">
+      <div class="flabel">📝 2. Pengajuan Surat Mandiri</div>
+      <p>Isi formulir elektronik dan unggah langsung jepretan foto dokumen persyaratan Anda menggunakan kamera HP dari rumah tanpa antre.</p>
+      <a href="#" data-page="unggah" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Isi Form Mandiri</a>
+    </div>
+    <div class="feature-card">
+      <div class="flabel">📣 3. Kotak Pengaduan "Wiku"</div>
+      <p>Media aspirasi, kritik, dan laporan pengawasan masyarakat demi peningkatan responsivitas dan perwujudan tata kelola Good Governance.</p>
+      <a href="#" data-page="aspirasi" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Kirim Aspirasi</a>
+    </div>
+  </div>
+</div>
+
+<div class="priority-wrap">
+  <div class="wrap">
+    <div class="priority-head">
+      <div class="bar"></div>
+      <h2>Jenis Pelayanan Surat Berfrekuensi Tertinggi (Respons Cepat 10–15 Menit)</h2>
+    </div>
+    <div class="priority-grid" id="priorityGrid"></div>
+  </div>
+</div>
+</div>
+
+<section class="steps page" id="alur">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Alur Layanan</div>
+      <h2>Enam langkah dari berkas sampai surat terbit</h2>
+      <p>Setiap permohonan mengikuti urutan yang sama, supaya warga tahu persis di tahap mana berkasnya berada.</p>
+    </div>
+    <div class="step-row">
+      <div class="step"><div class="num">01</div><h3>Siapkan Berkas</h3><p>KTP, KK, dan Surat Pengantar RT.</p></div>
+      <div class="step"><div class="num">02</div><h3>Pilih Jenis Surat</h3><p>Tentukan dari 10 layanan yang tersedia.</p></div>
+      <div class="step"><div class="num">03</div><h3>Unggah Berkas</h3><p>Kirim berkas langsung lewat formulir daring.</p></div>
+      <div class="step"><div class="num">04</div><h3>Verifikasi Petugas</h3><p>Kelengkapan dan kesesuaian data diperiksa.</p></div>
+      <div class="step"><div class="num">05</div><h3>Tanda Tangan Digital</h3><p>Lurah menandatangani dari kantor atau luar kantor.</p></div>
+      <div class="step"><div class="num">06</div><h3>Surat Terbit</h3><p>Notifikasi dikirim, surat siap diambil/diunduh.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="persyaratan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Berlaku untuk Semua Layanan</div>
+      <h2>Persyaratan umum</h2>
+      <p>Ketiga dokumen ini menjadi dasar data untuk seluruh jenis surat keterangan di bawah.</p>
+    </div>
+    <div class="req-grid">
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.4"/><path d="M14 10h4M14 14h3"/></svg>
+        <div><h3>KTP</h3><p>Kartu Tanda Penduduk elektronik pemohon yang masih berlaku.</p></div>
+      </div>
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+        <div><h3>Kartu Keluarga</h3><p>KK terbaru yang mencantumkan nama pemohon.</p></div>
+      </div>
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3v18M7 5h10l-2 3 2 3H7"/></svg>
+        <div><h3>Surat Pengantar RT</h3><p>Diketahui Ketua RT setempat sebagai dasar pengajuan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="layanan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">10 Jenis Layanan</div>
+      <h2>Surat keterangan yang tersedia</h2>
+      <p>Pilih salah satu untuk melihat rincian, lalu lanjutkan ke formulir unggah berkas.</p>
+    </div>
+    <div class="service-grid" id="serviceGrid"></div>
+  </div>
+</section>
+
+<section class="page" id="unggah">
+  <div class="wrap">
+    <div class="upload-panel">
+      <div>
+        <div class="section-eyebrow">Formulir Daring</div>
+        <h2>Unggah berkas persyaratan</h2>
+        <p style="color:#CFE3DF;font-size:14px;max-width:380px;">Berkas yang dikirim di sini menjadi acuan data petugas untuk menyiapkan seluruh jenis surat keterangan.</p>
+        <div class="req-hint">
+          <span class="chip">KTP</span><span class="chip">KK</span><span class="chip">Surat Pengantar RT</span>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label for="jenisSurat">Jenis Surat</label>
+          <select id="jenisSurat"></select>
+        </div>
+        <div class="field">
+          <label for="namaPemohon">Nama Pemohon</label>
+          <input type="text" id="namaPemohon" placeholder="Nama sesuai KTP">
+        </div>
+        <div class="field">
+          <label>Berkas (KTP, KK, Surat Pengantar RT)</label>
+          <div class="dropzone" id="dropzone">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E3A13B" stroke-width="1.7" style="margin:0 auto;"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+            <p>Seret berkas ke sini, atau <label for="fileInput" style="color:#E3A13B;text-decoration:underline;cursor:pointer;">pilih file</label></p>
+            <input type="file" id="fileInput" multiple style="display:none;">
+          </div>
+          <ul class="filelist" id="fileList"></ul>
+        </div>
+        <button class="btn btn-amber" id="submitUpload" style="width:100%;justify-content:center;">Kirim Permohonan</button>
+        <div class="ticket-msg" id="ticketMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="aspirasi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Suara Warga</div>
+      <h2>Sampaikan aspirasi</h2>
+      <p>Masukan, keluhan, atau usulan warga akan menjadi catatan bagi kelurahan untuk perbaikan layanan.</p>
+    </div>
+    <div class="aspirasi-grid">
+      <div class="form-card">
+        <div class="field"><label for="aspNama">Nama (opsional)</label><input type="text" id="aspNama" placeholder="Boleh dikosongkan"></div>
+        <div class="field">
+          <label for="aspKategori">Kategori</label>
+          <select id="aspKategori">
+            <option>Layanan Persuratan</option>
+            <option>Infrastruktur Lingkungan</option>
+            <option>Kebersihan</option>
+            <option>Keamanan</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="field"><label for="aspIsi">Aspirasi</label><textarea id="aspIsi" rows="4" placeholder="Tuliskan aspirasi Anda..."></textarea></div>
+        <button class="btn btn-dark" id="kirimAspirasi" style="width:100%;justify-content:center;">Kirim Aspirasi</button>
+      </div>
+      <div>
+        <div class="feed" id="feed">
+          <p class="feed-empty">Belum ada aspirasi masuk hari ini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-tag" id="modalTag">Layanan Surat</div>
+    <h3 id="modalTitle"></h3>
+    <p style="font-size:13.5px;color:#556865;margin:6px 0 0;" id="modalDesc"></p>
+    <ul>
+      <li>KTP pemohon</li>
+      <li>Kartu Keluarga (KK)</li>
+      <li>Surat Pengantar dari RT</li>
+    </ul>
+    <button class="btn btn-amber" id="modalAjukan" style="width:100%;justify-content:center;">Lanjut Unggah Berkas</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="authOverlay">
+  <div class="modal" style="max-width:380px;">
+    <button class="modal-close" id="authClose">✕</button>
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">Masuk</button>
+      <button type="button" class="auth-tab" data-tab="signup">Daftar</button>
+    </div>
+    <div class="auth-error" id="authError" style="display:none;"></div>
+    <form id="authForm">
+      <div class="field" id="authNamaField" style="display:none;">
+        <label for="authNama">Nama Lengkap</label>
+        <input type="text" id="authNama" placeholder="Nama sesuai KTP">
+      </div>
+      <div class="field">
+        <label for="authEmail">Email</label>
+        <input type="text" id="authEmail" placeholder="nama@email.com">
+      </div>
+      <div class="field">
+        <label for="authPassword">Kata Sandi</label>
+        <input type="password" id="authPassword" placeholder="Minimal 6 karakter">
+      </div>
+      <button type="submit" class="btn btn-amber" id="authSubmit" style="width:100%;justify-content:center;">Masuk</button>
+    </form>
+    <p style="font-size:11.5px;color:#8290A5;margin-top:12px;">Akun Staf/Kepala Lurah dibuat oleh admin sistem, bukan lewat pendaftaran mandiri.</p>
+  </div>
+</div>
+
+<div class="page" id="admin">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg viewBox="0 0 46 46" fill="none">
+          <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/>
+          <path d="M11 24c3.5-7 8-11 12-11s8.5 4 12 11" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <path d="M23 9 L25.2 14.2 L30.8 14.6 L26.5 18.2 L27.9 23.6 L23 20.6 L18.1 23.6 L19.5 18.2 L15.2 14.6 L20.8 14.2 Z" fill="#D4A017"/>
+        </svg>
+        <div>
+          <div class="name">PORTAL PELAYANAN PUBLIK KELURAHAN WATANG SOREANG</div>
+          <div class="eyebrow">Pemerintah Kota Parepare • Sistem Pemerintahan Berbasis Elektronik (SPBE)</div>
+        </div>
+      </div>
+      <div class="admin-user">
+        <span class="who">👤 Kepala Lurah: <b>H. Irwan, S.Sos</b></span>
+        <span class="badge-queue">🔔 <span id="adminQueueBadge">5</span> Antrian TTE</span>
+        <button class="btn-keluar" id="btnKeluarAdmin" type="button">Keluar</button>
+      </div>
+    </div>
+  </div>
+  <div class="admin-strip">
+    <span><span class="dot-live"></span>Sistem TTE Aktif — Tanda Tangan Elektronik terenkripsi sesuai Perpres No.95/2018 tentang SPBE &amp; Perda Kota Parepare No.9/2023</span>
+    <span>📍 Lokasi Akses: Dapat digunakan dari mana saja • Perangkat: HP / Laptop / Tablet</span>
+  </div>
+
+  <div class="admin-body">
+    <aside class="admin-sidebar">
+      <h5>Menu Kepala Lurah</h5>
+      <div class="admin-menu-item active" data-admin="antrian">Antrian TTE <span class="count" id="menuCountAntrian">5</span></div>
+      <div class="admin-menu-item" data-admin="riwayat">Sudah di-TTE <span class="count">18</span></div>
+      <div class="admin-menu-item" data-admin="rekap">Rekap Bulanan</div>
+      <div class="admin-menu-item" data-admin="pengaturan">Pengaturan TTE</div>
+      <div class="admin-menu-item" id="btnKembaliBeranda">Kembali ke Beranda</div>
+      <div class="admin-side-note">
+        <b>⚡ Keunggulan TTE</b><br>
+        Kepala Lurah <b>tidak perlu hadir fisik</b> di kantor. Surat dapat ditandatangani dari mana saja menggunakan perangkat apapun secara aman dan terenkripsi.
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div id="adminView-antrian" class="admin-view">
+        <div class="admin-main-head">
+          <div>
+            <h2>✍️ Antrian Tanda Tangan Elektronik (TTE)</h2>
+            <p>Pratinjau dan tandatangani dokumen surat warga secara elektronik dari mana saja. Surat otomatis terbit &amp; notifikasi WhatsApp dikirim ke warga setelah TTE berhasil.</p>
+          </div>
+          <div class="admin-datebadge">📅 Jumat, 26 Juni 2026 | 09:30 WITA</div>
+        </div>
+
+        <div class="admin-stats">
+          <div class="stat-card"><div class="stat-icon" style="background:#FFF2D6;">📝</div><div><div class="num" id="statMenunggu">5</div><div class="label">Menunggu TTE Hari Ini</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E3F6E9;">✅</div><div><div class="num" id="statSelesai">18</div><div class="label">Sudah di-TTE Bulan Ini</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E4ECFB;">⏱</div><div><div class="num">±3</div><div class="label">Menit Rata-rata Proses</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#FCE4E4;">📲</div><div><div class="num">100%</div><div class="label">Notif WA Terkirim</div></div></div>
+        </div>
+
+        <div class="admin-banner">📥 <b>Notifikasi Masuk:</b> <span id="statMenunggu2">5</span> dokumen telah diverifikasi oleh Staf Pelayanan dan siap untuk ditandatangani secara elektronik. Setelah TTE selesai, surat akan otomatis terbit dan notifikasi WhatsApp langsung dikirim kepada pemohon.</div>
+
+        <div class="admin-cols">
+          <div class="queue-panel">
+            <div class="panel-head">📋 Daftar Antrian TTE <span class="chip-count" id="queueCountChip">5 Dokumen</span></div>
+            <div class="queue-list" id="queueList"></div>
+          </div>
+          <div class="preview-panel">
+            <div class="panel-head">📄 Pratinjau Dokumen — <span id="previewName" style="color:var(--amber-deep);"></span></div>
+            <div class="doc-preview" id="docPreview"></div>
+          </div>
+        </div>
+
+        <div class="sign-panel">
+          <div class="sign-toast" id="signToast"></div>
+          <div class="sign-panel-title">🖋 Panel Tanda Tangan Elektronik — <span id="signPanelName" style="color:var(--amber-deep);"></span></div>
+          <div class="sign-panel-top">
+            <div class="sp-box"><div class="l">Nama Pemohon</div><div class="v" id="spNama">—</div></div>
+            <div class="sp-box"><div class="l">Jenis Surat</div><div class="v" id="spJenis">—</div></div>
+            <div class="sp-box"><div class="l">Status Berkas</div><div class="v" style="color:#1F8A4C;">✅ Lengkap — 4 dari 4 Berkas</div></div>
+          </div>
+          <div class="alur-box">
+            <div class="title">🔐 Alur Tanda Tangan Elektronik (TTE) — Integrasi SPBE</div>
+            <div class="sub">Proses TTE sepenuhnya digital dan terenkripsi. Kepala Lurah tidak perlu hadir fisik di kantor. Setelah tombol TTE ditekan, surat terbit otomatis dan notifikasi WhatsApp langsung dikirim ke pemohon.</div>
+            <div class="alur-steps">
+              <span class="alur-step done">✔ 1. Staf Verifikasi Berkas</span>
+              <span class="alur-step done">✔ 2. Diteruskan ke Lurah</span>
+              <span class="alur-step current">● 3. Lurah TTE (Sekarang)</span>
+              <span class="alur-step next">4. Notif WA ke Warga</span>
+            </div>
+          </div>
+          <div class="sign-actions">
+            <button class="btn-sign-now" id="btnSignNow" type="button">🖋 Tanda Tangani Elektronik (TTE) Sekarang</button>
+            <button class="btn-skip" id="btnSkip" type="button">⏭ Lewati — Tanda Tangani Berikutnya</button>
+            <button class="btn-return" id="btnReturn" type="button">✕ Kembalikan ke Staf</button>
+          </div>
+        </div>
+
+        <div class="history-panel">
+          <div class="panel-head">🕒 Riwayat TTE Hari Ini — Jumat, 26 Juni 2026</div>
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu TTE</th><th>Status</th><th>Notif WA</th></tr></thead>
+              <tbody id="riwayatBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="adminView-riwayat" class="admin-view" style="display:none;">
+        <div class="admin-main-head"><div><h2>✅ Dokumen Sudah di-TTE</h2><p>Daftar surat yang telah selesai ditandatangani secara elektronik hari ini.</p></div></div>
+        <div class="history-panel">
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu TTE</th><th>Status</th><th>Notif WA</th></tr></thead>
+              <tbody id="riwayatBodyFull"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="adminView-rekap" class="admin-view" style="display:none;">
+        <div class="placeholder-panel"><span class="pico">📊</span><b>Rekap Bulanan</b><br>Fitur ini akan menampilkan grafik jumlah TTE per jenis surat dan opsi unduh laporan bulanan.</div>
+      </div>
+
+      <div id="adminView-pengaturan" class="admin-view" style="display:none;">
+        <div class="placeholder-panel"><span class="pico">⚙️</span><b>Pengaturan TTE</b><br>Pengelolaan sertifikat elektronik, PIN keamanan, dan preferensi notifikasi WhatsApp akan tersedia di sini.</div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <span><b>Kelurahan Watang Soreang</b> • Kecamatan Soreang, Kota Parepare. WhatsApp: 0891-3335-3440</span>
+    <span>Politeknik STIA LAN Makassar © 2026</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ---------- Supabase client ----------
+const SUPABASE_URL = 'https://dqjoldipdnxzvkkcvavl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_D4pGeZU83wVbUIcB_mzWig_aI4x9Bu1';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let currentUser = null;
+let currentProfile = null;
+
+// ---------- data ----------
+const layanan = [
+  {id:'penghasilan', nama:'Surat Keterangan Penghasilan Orang Tua', desc:'Menerangkan besaran penghasilan orang tua/wali sebagai syarat pengajuan beasiswa atau keringanan biaya pendidikan anak.', icon:'<path d="M4 7h16v10H4Z"/><circle cx="12" cy="12" r="2.6"/><path d="M7 7v10M17 7v10"/>'},
+  {id:'kematian', nama:'Surat Keterangan Kematian', desc:'Menerangkan bahwa seorang warga telah meninggal dunia, untuk keperluan administrasi lanjutan.', icon:'<path d="M12 3v6M12 9c-3 0-5 2.5-5 6v3h10v-3c0-3.5-2-6-5-6Z"/><path d="M6 21h12"/>'},
+  {id:'kelahiran', nama:'Surat Keterangan Kelahiran', desc:'Menerangkan kelahiran seorang anak sebagai dasar penerbitan akta kelahiran.', icon:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'},
+  {id:'rumah', nama:'Surat Keterangan Pembuatan Rumah', desc:'Menerangkan izin/keterangan pendirian bangunan rumah tinggal warga.', icon:'<path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>'},
+  {id:'nikah', nama:'Surat Keterangan Izin Nikah', desc:'Menerangkan status dan izin warga untuk melangsungkan pernikahan.', icon:'<circle cx="9" cy="14" r="4"/><circle cx="16" cy="10" r="4"/>'},
+  {id:'bedanama', nama:'Surat Keterangan Beda Nama', desc:'Menerangkan perbedaan penulisan nama pada beberapa dokumen kependudukan.', icon:'<path d="M4 7h6M4 12h4"/><path d="M14 17l3-10 3 10"/><path d="M15 14h4"/>'},
+  {id:'tidakmampu', nama:'Surat Keterangan Tidak Mampu', desc:'Menerangkan kondisi ekonomi warga untuk keperluan bantuan sosial/pendidikan.', icon:'<path d="M6 13V7a2 2 0 114 0v5"/><path d="M10 12V5a2 2 0 114 0v7"/><path d="M14 12V7a2 2 0 114 0v6c0 4-2 7-6 7H9c-2 0-3-1-4-3l-1.5-3"/>'},
+  {id:'pdam', nama:'Surat Keterangan Penggunaan Air PDAM', desc:'Menerangkan status penggunaan/pelanggan air PDAM pada suatu alamat.', icon:'<path d="M12 3s6 7 6 11a6 6 0 11-12 0c0-4 6-11 6-11Z"/>'},
+  {id:'ahliwaris', nama:'Surat Keterangan Ahli Waris', desc:'Menerangkan pihak-pihak yang sah sebagai ahli waris dari seorang warga.', icon:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12c0 2 1.5 3 3 3s3-1 3-3M12 15v3"/>'},
+  {id:'penguburan', nama:'Surat Keterangan Penguburan', desc:'Menerangkan izin pemakaman/penguburan jenazah warga di TPU setempat.', icon:'<path d="M7 21V11a5 5 0 0110 0v10"/><path d="M4 21h16"/>'},
+  {id:'domisili', nama:'Surat Keterangan Bertempat Tinggal', desc:'Menerangkan domisili/tempat tinggal warga di wilayah Kelurahan Watang Soreang.', icon:'<path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/>'}
+];
+
+// ---------- render service cards ----------
+const grid = document.getElementById('serviceGrid');
+layanan.forEach(l=>{
+  const card = document.createElement('button');
+  card.className='service-card';
+  card.type='button';
+  card.innerHTML=`
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${l.icon}</svg>
+    <h3>${l.nama}</h3>
+    <span class="go">Lihat detail →</span>`;
+  card.addEventListener('click',()=>openModal(l.id));
+  grid.appendChild(card);
+});
+
+// populate select in upload form
+const jenisSelect = document.getElementById('jenisSurat');
+layanan.forEach(l=>{
+  const opt=document.createElement('option');
+  opt.value=l.id; opt.textContent=l.nama;
+  jenisSelect.appendChild(opt);
+});
+
+// ---------- priority services (homepage) ----------
+const prioritas = [
+  {id:'penghasilan', judul:'SK Penghasilan Orang Tua', waktu:'10 - 15 Menit', desc:'Permohonan paling dominan (10-15 permohonan/hari) untuk kebutuhan beasiswa anak sekolah.'},
+  {id:'nikah', judul:'Surat Keterangan Izin Nikah', waktu:'10 - 15 Menit', desc:'Pengurusan surat pengantar administrasi pernikahan tingkat KUA Kelurahan Watang Soreang.'},
+  {id:'tidakmampu', judul:'SK Tidak Mampu (SKTM)', waktu:'10 - 15 Menit', desc:'Surat jaminan bantuan sosial, layanan kesehatan gratis, dan dispensasi biaya sekolah.'},
+  {id:'pdam', judul:'SK Penggunaan Air PDAM', waktu:'10 - 15 Menit', desc:'Keterangan kelayakan atau pengantar administrasi sambungan air bersih warga Watang Soreang.'}
+];
+const priorityGrid = document.getElementById('priorityGrid');
+prioritas.forEach(p=>{
+  const card=document.createElement('div');
+  card.className='priority-card';
+  card.innerHTML=`
+    <h3>${p.judul}</h3>
+    <div class="time">⏱ ${p.waktu}</div>
+    <p>${p.desc}</p>
+    <button class="btn-outline-navy" type="button">Ajukan Surat</button>`;
+  card.querySelector('button').addEventListener('click',()=>openModal(p.id));
+  priorityGrid.appendChild(card);
+});
+
+// ---------- login / signup (Supabase Auth) ----------
+const authOverlay = document.getElementById('authOverlay');
+const authForm = document.getElementById('authForm');
+const authError = document.getElementById('authError');
+let authMode = 'login';
+
+function openAuth(mode){
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===mode));
+  document.getElementById('authNamaField').style.display = mode==='signup' ? 'block' : 'none';
+  document.getElementById('authSubmit').textContent = mode==='signup' ? 'Daftar' : 'Masuk';
+  authError.style.display='none';
+  authOverlay.classList.add('show');
+}
+document.getElementById('btnLogin').addEventListener('click',()=>openAuth('login'));
+document.getElementById('btnSignup').addEventListener('click',()=>openAuth('signup'));
+document.getElementById('authClose').addEventListener('click',()=>authOverlay.classList.remove('show'));
+authOverlay.addEventListener('click',e=>{if(e.target===authOverlay) authOverlay.classList.remove('show');});
+document.querySelectorAll('.auth-tab').forEach(t=>t.addEventListener('click',()=>openAuth(t.dataset.tab)));
+
+authForm.addEventListener('submit', async e=>{
+  e.preventDefault();
+  const email=document.getElementById('authEmail').value.trim();
+  const password=document.getElementById('authPassword').value;
+  const nama=document.getElementById('authNama').value.trim();
+  authError.style.display='none';
+  try{
+    if(authMode==='signup'){
+      const {data,error} = await sb.auth.signUp({email,password,options:{data:{nama_lengkap:nama}}});
+      if(error) throw error;
+      if(!data.session){
+        authError.style.display='block';
+        authError.style.background='#E7F6EC'; authError.style.color='#1A5C36';
+        authError.textContent='Pendaftaran berhasil! Jika verifikasi email aktif di project Supabase, cek email dulu sebelum login.';
+        return;
+      }
+    } else {
+      const {data,error} = await sb.auth.signInWithPassword({email,password});
+      if(error) throw error;
+    }
+    authOverlay.classList.remove('show');
+    authForm.reset();
+    await refreshAuthState();
+  } catch(err){
+    authError.style.display='block';
+    authError.style.background='#FFF3F4'; authError.style.color='#B4232C';
+    authError.textContent = err.message || 'Terjadi kesalahan. Coba lagi.';
+  }
+});
+
+async function refreshAuthState(){
+  const {data:{session}} = await sb.auth.getSession();
+  currentUser = session?.user || null;
+  if(currentUser){
+    const {data:profile} = await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+    currentProfile = profile;
+  } else {
+    currentProfile = null;
+  }
+  updateAuthUI();
+}
+
+function updateAuthUI(){
+  const navTTE = document.getElementById('navTTE');
+  if(currentUser && currentProfile){
+    document.getElementById('btnLogin').style.display='none';
+    document.getElementById('btnSignup').style.display='none';
+    document.getElementById('userBadge').style.display='flex';
+    document.getElementById('userBadgeName').textContent = '👤 '+(currentProfile.nama_lengkap || currentUser.email);
+    navTTE.style.display = currentProfile.role==='lurah' ? 'inline' : 'none';
+  } else {
+    document.getElementById('btnLogin').style.display='';
+    document.getElementById('btnSignup').style.display='';
+    document.getElementById('userBadge').style.display='none';
+    navTTE.style.display='none';
+  }
+}
+document.getElementById('btnLogout').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  await refreshAuthState();
+  showPage('beranda');
+});
+refreshAuthState();
+
+// ---------- modal ----------
+const overlay=document.getElementById('modalOverlay');
+function openModal(id){
+  const l = layanan.find(x=>x.id===id);
+  document.getElementById('modalTitle').textContent = l.nama;
+  document.getElementById('modalDesc').textContent = l.desc;
+  overlay.classList.add('show');
+  overlay.dataset.current = id;
+}
+document.getElementById('modalClose').addEventListener('click',()=>overlay.classList.remove('show'));
+overlay.addEventListener('click',e=>{if(e.target===overlay) overlay.classList.remove('show');});
+document.getElementById('modalAjukan').addEventListener('click',()=>{
+  jenisSelect.value = overlay.dataset.current;
+  overlay.classList.remove('show');
+  showPage('unggah');
+});
+
+// ---------- page navigation ----------
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(a=>{
+    a.classList.toggle('active', a.dataset.page===id);
+  });
+  window.scrollTo({top:0, behavior:'instant' in document.documentElement.style ? 'auto' : 'auto'});
+  document.getElementById('nav').classList.remove('open');
+}
+document.querySelectorAll('[data-page]').forEach(el=>{
+  el.addEventListener('click',e=>{
+    e.preventDefault();
+    showPage(el.dataset.page);
+  });
+});
+document.querySelector('.brand').style.cursor='pointer';
+document.querySelector('.brand').addEventListener('click',()=>showPage('beranda'));
+
+// ---------- nav toggle (mobile) ----------
+document.getElementById('navToggle').addEventListener('click',()=>{
+  document.getElementById('nav').classList.toggle('open');
+});
+
+// ---------- upload / dropzone ----------
+const dropzone=document.getElementById('dropzone');
+const fileInput=document.getElementById('fileInput');
+const fileListEl=document.getElementById('fileList');
+let files=[];
+
+function renderFiles(){
+  fileListEl.innerHTML='';
+  files.forEach((f,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span>${f.name} <span style="color:#9FBDB7;">(${Math.max(1,Math.round(f.size/1024))} KB)</span></span>`;
+    const btn=document.createElement('button');
+    btn.textContent='Hapus';
+    btn.addEventListener('click',()=>{files.splice(i,1);renderFiles();});
+    li.appendChild(btn);
+    fileListEl.appendChild(li);
+  });
+}
+fileInput.addEventListener('change',e=>{
+  files = files.concat(Array.from(e.target.files));
+  renderFiles();
+});
+['dragenter','dragover'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.add('drag');}));
+['dragleave','drop'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
+dropzone.addEventListener('drop',e=>{
+  files = files.concat(Array.from(e.dataTransfer.files));
+  renderFiles();
+});
+
+document.getElementById('submitUpload').addEventListener('click', async ()=>{
+  const nama=document.getElementById('namaPemohon').value.trim();
+  const msg=document.getElementById('ticketMsg');
+  if(!currentUser){
+    msg.textContent='Silakan Login atau Sign Up terlebih dahulu sebelum mengajukan surat.';
+    msg.classList.add('show');
+    openAuth('login');
+    return;
+  }
+  if(!nama || files.length===0){
+    msg.textContent='Lengkapi nama pemohon dan unggah minimal satu berkas terlebih dahulu.';
+    msg.classList.add('show');
+    return;
+  }
+  msg.textContent='Mengirim permohonan...';
+  msg.classList.add('show');
+  try{
+    const uploadedPaths=[];
+    for(const f of files){
+      const path = `${currentUser.id}/${Date.now()}-${f.name}`;
+      const {error:upErr} = await sb.storage.from('berkas-persyaratan').upload(path, f);
+      if(upErr) throw upErr;
+      uploadedPaths.push(path);
+    }
+    const {data,error} = await sb.from('pengajuan').insert({
+      warga_id: currentUser.id,
+      jenis_surat_id: jenisSelect.value,
+      data: {nama, berkas: uploadedPaths}
+    }).select().single();
+    if(error) throw error;
+    msg.innerHTML = `Permohonan diterima. Simpan kode tiket <span class="mono">${data.nomor_tiket}</span> untuk memantau status verifikasi dan tanda tangan digital.`;
+    files=[]; renderFiles();
+    document.getElementById('namaPemohon').value='';
+  } catch(err){
+    msg.textContent = 'Gagal mengirim permohonan: '+(err.message || 'terjadi kesalahan.');
+  }
+});
+
+// ---------- aspirasi feed (Supabase) ----------
+const feed=document.getElementById('feed');
+async function loadAspirasi(){
+  const {data,error} = await sb.from('aspirasi').select('*').order('created_at',{ascending:false}).limit(20);
+  feed.innerHTML='';
+  if(error || !data || data.length===0){
+    feed.innerHTML='<p class="feed-empty">Belum ada aspirasi masuk hari ini.</p>';
+    return;
+  }
+  data.forEach(a=>{
+    const time=new Date(a.created_at).toLocaleString('id-ID',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'});
+    const item=document.createElement('div');
+    item.className='feed-item';
+    item.innerHTML=`<div class="meta"><span>${a.nama_tampilan}</span>·<span>${a.kategori}</span>·<span>${time}</span></div>${a.isi}`;
+    feed.appendChild(item);
+  });
+}
+document.getElementById('kirimAspirasi').addEventListener('click', async ()=>{
+  const isi=document.getElementById('aspIsi').value.trim();
+  if(!isi) return;
+  const nama=document.getElementById('aspNama').value.trim() || 'Warga (anonim)';
+  const kategori=document.getElementById('aspKategori').value;
+  const {error} = await sb.from('aspirasi').insert({
+    warga_id: currentUser ? currentUser.id : null,
+    nama_tampilan: nama, kategori, isi
+  });
+  if(!error){
+    document.getElementById('aspIsi').value='';
+    document.getElementById('aspNama').value='';
+    loadAspirasi();
+  } else {
+    alert('Gagal mengirim aspirasi: '+error.message);
+  }
+});
+loadAspirasi();
+
+// ================= Admin TTE Dashboard (Supabase) =================
+const jenisPurpose = {
+  nikah:'Adalah benar warga Kelurahan Watang Soreang dan bermaksud untuk melangsungkan pernikahan. Surat keterangan ini diberikan untuk keperluan administrasi di KUA Kecamatan Soreang.',
+  tidakmampu:'Adalah benar warga Kelurahan Watang Soreang yang termasuk dalam kategori keluarga kurang mampu. Surat keterangan ini diberikan untuk keperluan pengajuan bantuan sosial dan keringanan biaya kesehatan/pendidikan.',
+  domisili:'Adalah benar warga yang berdomisili/bertempat tinggal di wilayah Kelurahan Watang Soreang sebagaimana alamat tersebut di atas.',
+  penghasilan:'Adalah benar orang tua/wali dari peserta didik dengan penghasilan sebagaimana tercantum di atas. Surat keterangan ini diberikan untuk keperluan pengajuan beasiswa/keringanan biaya pendidikan.',
+  pdam:'Adalah benar warga yang menggunakan/berlangganan air PDAM pada alamat tersebut di atas untuk keperluan administrasi sambungan air bersih.'
+};
+
+let queue = [];
+let riwayat = [];
+let bulanSelesai = 0;
+let selectedQueueId = null;
+
+async function fetchQueue(){
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .in('status',['diajukan','diverifikasi','siap_ttd'])
+    .order('created_at',{ascending:true});
+  if(error){ console.error(error); queue=[]; return; }
+  queue = (data||[]).map(row=>({
+    id: row.id,
+    jenis_id: row.jenis_surat_id,
+    nama: row.data?.nama || '(tanpa nama)',
+    jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    masuk: new Date(row.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    status: row.status==='siap_ttd' ? 'siap' : 'menunggu',
+    nik: row.data?.nik || '-',
+    ttl: row.data?.ttl || '-',
+    jk: row.data?.jk || '-',
+    agama: row.data?.agama || '-',
+    sk: row.data?.status_nikah || '-',
+    alamat: row.data?.alamat || '-'
+  }));
+  if(!queue.find(q=>q.id===selectedQueueId)) selectedQueueId = queue.length ? queue[0].id : null;
+}
+
+async function fetchRiwayat(){
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .in('status',['ttd_selesai','dikembalikan'])
+    .order('updated_at',{ascending:false})
+    .limit(15);
+  if(error){ console.error(error); riwayat=[]; return; }
+  riwayat = (data||[]).map((row,i)=>({
+    no: i+1,
+    nama: row.data?.nama || '(tanpa nama)',
+    jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    waktu: new Date(row.updated_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    status: row.status==='ttd_selesai' ? 'selesai' : 'dikembalikan',
+    notif: row.status==='ttd_selesai' ? 'Terkirim' : (row.catatan_staf || 'Menunggu perbaikan berkas')
+  }));
+}
+
+async function fetchBulanSelesai(){
+  const startOfMonth = new Date(); startOfMonth.setDate(1); startOfMonth.setHours(0,0,0,0);
+  const {count,error} = await sb.from('pengajuan')
+    .select('*',{count:'exact',head:true})
+    .eq('status','ttd_selesai')
+    .gte('ditandatangani_at', startOfMonth.toISOString());
+  bulanSelesai = error ? 0 : (count||0);
+}
+
+function fmtStatusPill(s){
+  const map={siap:['siap','Siap TTE'], menunggu:['menunggu','Menunggu'], selesai:['selesai','✓ TTE Selesai'], dikembalikan:['dikembalikan','✕ Dikembalikan']};
+  const m=map[s]||['menunggu',s];
+  return `<span class="status-pill ${m[0]}">${m[1]}</span>`;
+}
+
+async function renderAdminAll(){
+  await Promise.all([fetchQueue(), fetchRiwayat(), fetchBulanSelesai()]);
+  renderQueue(); renderPreviewPanel(); renderRiwayatHariIni(); renderRiwayatFull(); renderStats();
+}
+
+function renderStats(){
+  document.getElementById('statMenunggu').textContent = queue.length;
+  document.getElementById('statMenunggu2').textContent = queue.length;
+  document.getElementById('statSelesai').textContent = bulanSelesai;
+  document.getElementById('adminQueueBadge').textContent = queue.length;
+  document.getElementById('menuCountAntrian').textContent = queue.length;
+  document.getElementById('queueCountChip').textContent = queue.length + ' Dokumen';
+}
+
+function renderQueue(){
+  const list=document.getElementById('queueList');
+  list.innerHTML='';
+  if(queue.length===0){
+    list.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#7A8AA0;">Semua dokumen telah diproses. 🎉</div>';
+  }
+  queue.forEach((q,i)=>{
+    const row=document.createElement('div');
+    row.className='queue-item'+(q.id===selectedQueueId?' selected':'');
+    row.innerHTML=`
+      <div class="queue-num">${i+1}</div>
+      <div class="qi-body">
+        <div class="qi-top">
+          <div>
+            <div class="qi-name">${q.nama}</div>
+            <div class="qi-jenis">${q.jenis}</div>
+          </div>
+          ${fmtStatusPill(q.status)}
+        </div>
+        <div class="qi-meta">🕒 Masuk: ${q.masuk} — Berkas: 4/4 ✅</div>
+      </div>`;
+    row.addEventListener('click',()=>{selectedQueueId=q.id; renderQueue(); renderPreviewPanel();});
+    list.appendChild(row);
+  });
+}
+
+function docNumber(id){
+  const short = String(id).replace(/-/g,'').slice(0,3).toUpperCase();
+  return `474.2/${short}/KEL-WS/VI/2026`;
+}
+
+function renderPreviewPanel(){
+  const item = queue.find(q=>q.id===selectedQueueId);
+  const previewName=document.getElementById('previewName');
+  const signPanelName=document.getElementById('signPanelName');
+  const spNama=document.getElementById('spNama');
+  const spJenis=document.getElementById('spJenis');
+  const docPreview=document.getElementById('docPreview');
+  const btnSignNow=document.getElementById('btnSignNow');
+
+  if(!item){
+    previewName.textContent='—';
+    signPanelName.textContent='—';
+    spNama.textContent='—'; spJenis.textContent='—';
+    docPreview.innerHTML='<p style="color:#7A8AA0;">Tidak ada dokumen dalam antrian.</p>';
+    btnSignNow.disabled=true;
+    return;
+  }
+  btnSignNow.disabled=false;
+  previewName.textContent=item.nama;
+  signPanelName.textContent=item.nama+' / '+item.jenis;
+  spNama.textContent=item.nama;
+  spJenis.textContent=item.jenis;
+
+  docPreview.innerHTML=`
+    <div class="letterhead">
+      <svg viewBox="0 0 46 46" fill="none"><path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/></svg>
+      <div>
+        <b>PEMERINTAH KOTA PAREPARE</b>
+        <b>KECAMATAN SOREANG</b>
+        <b>KELURAHAN WATANG SOREANG</b>
+        <div style="font-size:10px;color:#7A8AA0;">Jl. Watang Soreang No.1, Kec. Soreang, Kota Parepare, Sulawesi Selatan 91131<br>Telp. (0421) XXXXXX • Email: watangsoreang@parepare.go.id</div>
+      </div>
+    </div>
+    <div class="doc-title">${item.jenis.toUpperCase()}</div>
+    <div class="doc-num">Nomor: ${docNumber(item.id)}</div>
+    <p>Yang bertanda tangan di bawah ini, Lurah Watang Soreang Kecamatan Soreang Kota Parepare, dengan ini menerangkan bahwa:</p>
+    <div class="doc-field"><span>Nama Lengkap</span><span>:</span><b>${item.nama.toUpperCase()}</b></div>
+    <div class="doc-field"><span>NIK</span><span>:</span><span>${item.nik}</span></div>
+    <div class="doc-field"><span>Tempat / Tgl. Lahir</span><span>:</span><span>${item.ttl}</span></div>
+    <div class="doc-field"><span>Jenis Kelamin</span><span>:</span><span>${item.jk}</span></div>
+    <div class="doc-field"><span>Agama</span><span>:</span><span>${item.agama}</span></div>
+    <div class="doc-field"><span>Status</span><span>:</span><span>${item.sk}</span></div>
+    <div class="doc-field"><span>Alamat</span><span>:</span><span>${item.alamat}</span></div>
+    <p style="margin-top:12px;">${jenisPurpose[item.jenis_id] || 'Surat keterangan ini diberikan untuk keperluan administrasi sebagaimana mestinya.'}</p>
+    <p style="margin-top:10px;">Parepare, 26 Juni 2026<br><b>Lurah Watang Soreang,</b></p>
+    <div class="sign-box">
+      <div class="st">✅ TANDA TANGAN ELEKTRONIK</div>
+      <div class="who">H. IRWAN, S.Sos</div>
+      <div class="meta">NIP: 19XXXXXXXXXXXX</div>
+      <div class="meta">Hash: A3F6-92BC-TTE-SPBE-2026</div>
+      <div class="meta">🔒 Terverifikasi SPBE Kota Parepare</div>
+    </div>`;
+}
+
+function renderRiwayatHariIni(){
+  const body=document.getElementById('riwayatBody');
+  if(!body) return;
+  body.innerHTML='';
+  riwayat.slice(0,8).forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${String(r.no).padStart(2,'0')}</td><td><b>${r.nama}</b></td><td>${r.jenis}</td><td>${r.waktu}</td><td>${fmtStatusPill(r.status)}</td><td>${r.status==='selesai'?'📩 '+r.notif:'⚠️ '+r.notif}</td>`;
+    body.appendChild(tr);
+  });
+}
+function renderRiwayatFull(){
+  const body=document.getElementById('riwayatBodyFull');
+  if(!body) return;
+  body.innerHTML='';
+  riwayat.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${String(r.no).padStart(2,'0')}</td><td><b>${r.nama}</b></td><td>${r.jenis}</td><td>${r.waktu}</td><td>${fmtStatusPill(r.status)}</td><td>${r.status==='selesai'?'📩 '+r.notif:'⚠️ '+r.notif}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+function showToast(msg){
+  const t=document.getElementById('signToast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),3800);
+}
+
+document.getElementById('btnSignNow').addEventListener('click', async ()=>{
+  const item = queue.find(q=>q.id===selectedQueueId);
+  if(!item || !currentUser) return;
+  const {error} = await sb.from('pengajuan').update({
+    status:'ttd_selesai', ditandatangani_oleh: currentUser.id
+  }).eq('id', item.id);
+  if(error){ showToast('Gagal menandatangani: '+error.message); return; }
+  showToast(`✅ TTE berhasil! ${item.jenis} a.n. ${item.nama} telah terbit dan notifikasi WhatsApp telah dikirim ke pemohon.`);
+  await renderAdminAll();
+});
+
+document.getElementById('btnSkip').addEventListener('click',()=>{
+  if(queue.length<2) return;
+  const idx = queue.findIndex(q=>q.id===selectedQueueId);
+  const next = queue[(idx+1)%queue.length];
+  selectedQueueId = next.id;
+  renderQueue(); renderPreviewPanel();
+});
+
+document.getElementById('btnReturn').addEventListener('click', async ()=>{
+  const item = queue.find(q=>q.id===selectedQueueId);
+  if(!item || !currentUser) return;
+  const catatan = prompt('Catatan untuk staf pelayanan (opsional):','Data tidak sesuai') || 'Data tidak sesuai';
+  const {error} = await sb.from('pengajuan').update({
+    status:'dikembalikan', catatan_staf: catatan
+  }).eq('id', item.id);
+  if(error){ showToast('Gagal mengembalikan: '+error.message); return; }
+  showToast(`↩️ Dokumen ${item.jenis} a.n. ${item.nama} dikembalikan ke Staf Pelayanan untuk perbaikan berkas.`);
+  await renderAdminAll();
+});
+
+// ---------- sidebar view switching ----------
+document.querySelectorAll('.admin-menu-item[data-admin]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.admin-menu-item[data-admin]').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.admin-view').forEach(v=>v.style.display='none');
+    document.getElementById('adminView-'+el.dataset.admin).style.display='block';
+  });
+});
+
+// ---------- enter / exit admin dashboard ----------
+function enterAdmin(){
+  if(!currentUser || !currentProfile || currentProfile.role!=='lurah'){
+    alert('Halaman ini khusus untuk akun Kepala Lurah. Silakan login dengan akun Lurah terlebih dahulu.');
+    openAuth('login');
+    return;
+  }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('admin').classList.add('active');
+  document.querySelector('header').style.display='none';
+  window.scrollTo(0,0);
+  renderAdminAll();
+}
+function exitAdmin(){
+  document.querySelector('header').style.display='';
+  showPage('beranda');
+}
+document.getElementById('navTTE').addEventListener('click',e=>{
+  e.preventDefault();
+  document.getElementById('nav').classList.remove('open');
+  enterAdmin();
+});
+document.getElementById('btnKeluarAdmin').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  await refreshAuthState();
+  exitAdmin();
+});
+document.getElementById('btnKembaliBeranda').addEventListener('click',exitAdmin);
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layanan Kelurahan Watang Soreang</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#16233B;
+    --paper:#F4F6F9;
+    --paper-soft:#FFFFFF;
+    --teal-deep:#0B2A55;
+    --teal:#163E77;
+    --sea:#6F8FBF;
+    --amber:#D4A017;
+    --amber-deep:#A9800E;
+    --line:#DDE2EA;
+    --white:#FFFFFF;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; transition-duration:0.01ms !important;}
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Plus Jakarta Sans',sans-serif;
+    line-height:1.55;
+  }
+  h1,h2,h3,.display{font-family:'Fraunces',serif;}
+  .mono{font-family:'JetBrains Mono',monospace;}
+  a{color:inherit;}
+  img,svg{display:block;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  button{font-family:inherit;cursor:pointer;}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:2px;}
+
+  /* ---- Header ---- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:var(--teal-deep);
+    color:var(--paper-soft);
+  }
+  .header-top{
+    display:flex;align-items:center;justify-content:space-between;gap:20px;
+    padding:16px 24px;max-width:1120px;margin:0 auto;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand-mark{width:46px;height:46px;flex:none;}
+  .brand-text{line-height:1.25;}
+  .brand-text .name{font-family:'Fraunces',serif;font-size:19px;font-weight:700;letter-spacing:.01em;text-transform:uppercase;}
+  .brand-text .eyebrow{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-weight:700;margin-top:4px;}
+  .header-actions{display:flex;gap:10px;flex:none;}
+  .btn-mini{
+    padding:10px 20px;border-radius:8px;font-weight:700;font-size:13px;letter-spacing:.03em;
+    background:var(--amber);color:var(--teal-deep);border:none;
+  }
+  .btn-mini:hover{background:var(--amber-deep);}
+  .btn-mini.outline{background:transparent;color:var(--paper-soft);border:1px solid rgba(245,238,221,.4);}
+  .header-nav-row{background:rgba(0,0,0,.18);border-top:2px solid var(--amber);}
+  nav{display:flex;gap:22px;font-size:13.5px;font-weight:500;max-width:1120px;margin:0 auto;padding:12px 24px;flex-wrap:wrap;}
+  nav a{text-decoration:none;opacity:.85;padding:4px 2px;border-bottom:2px solid transparent;transition:opacity .2s,border-color .2s;}
+  nav a:hover{opacity:1;border-color:var(--amber);}
+  nav a.active{opacity:1;border-color:var(--amber);color:var(--amber);}
+  .nav-toggle{display:none;background:none;border:1px solid rgba(245,238,221,.4);color:var(--paper-soft);border-radius:8px;padding:8px 10px;}
+  @media (max-width:860px){
+    .header-nav-row nav{position:absolute;top:100%;left:0;right:0;background:var(--teal-deep);flex-direction:column;padding:14px 24px 20px;gap:14px;display:none;}
+    .header-nav-row nav.open{display:flex;}
+    .header-nav-row{position:relative;}
+    .nav-toggle{display:block;}
+    .header-actions .btn-mini{padding:8px 14px;font-size:12px;}
+  }
+
+  /* ---- Hero v2 (mockup match) ---- */
+  .hero{
+    position:relative;
+    background:linear-gradient(135deg,var(--teal-deep) 0%,var(--teal) 100%);
+    color:var(--paper-soft);
+    padding:56px 0 48px;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1.3fr .8fr;gap:40px;align-items:start;
+  }
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;}}
+  .hero h1{font-size:clamp(26px,3.4vw,38px);font-weight:800;line-height:1.18;margin:0 0 16px;text-transform:uppercase;letter-spacing:.01em;}
+  .hero p.lead{font-size:15.5px;color:#D9E2F0;max-width:540px;margin:0 0 26px;}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:13px 22px;border-radius:999px;font-weight:600;font-size:14.5px;
+    border:1px solid transparent;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-amber{background:var(--amber);color:var(--teal-deep);}
+  .btn-amber:hover{background:var(--amber-deep);}
+  .btn-ghost{background:transparent;color:var(--paper-soft);border-color:rgba(245,238,221,.4);}
+  .btn-ghost:hover{border-color:var(--amber);}
+  .btn-dark{background:var(--teal-deep);color:var(--paper-soft);}
+  .btn-dark:hover{background:var(--ink);}
+
+  .spbe-box{
+    border:1.5px dashed var(--amber);border-radius:12px;padding:20px 22px;text-align:center;
+    background:rgba(212,160,23,.06);
+  }
+  .spbe-box .tag{font-size:12.5px;font-weight:800;color:var(--amber);letter-spacing:.06em;margin-bottom:8px;}
+  .spbe-box p{font-size:13px;color:#D9E2F0;margin:0;line-height:1.5;}
+
+  .feature-row-wrap{background:var(--paper-soft);border-top:3px solid var(--amber);}
+  .feature-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;padding:36px 0 4px;}
+  @media (max-width:820px){.feature-row{grid-template-columns:1fr;gap:28px;padding:32px 0;}}
+  .feature-card{padding:0 28px;border-left:1px solid var(--line);}
+  .feature-card:first-child{border-left:none;padding-left:0;}
+  @media (max-width:820px){.feature-card{border-left:none;padding:0;}}
+  .feature-card .flabel{font-size:16px;font-weight:800;margin:0 0 10px;display:flex;align-items:center;gap:8px;}
+  .feature-card p{font-size:13.5px;color:#4B5A72;margin:0 0 16px;min-height:66px;}
+  @media (max-width:820px){.feature-card p{min-height:0;}}
+
+  .priority-wrap{padding:52px 0 68px;}
+  .priority-head{display:flex;align-items:center;gap:12px;margin-bottom:28px;}
+  .priority-head .bar{width:5px;height:26px;background:var(--amber);border-radius:3px;}
+  .priority-head h2{font-size:19px;font-weight:800;margin:0;}
+  .priority-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:960px){.priority-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.priority-grid{grid-template-columns:1fr;}}
+  .priority-card{
+    background:var(--white);border:1px solid var(--line);border-radius:12px;
+    padding:20px;text-align:center;display:flex;flex-direction:column;
+  }
+  .priority-card h3{font-size:14.5px;font-weight:800;margin:0 0 8px;line-height:1.3;}
+  .priority-card .time{font-size:12px;font-weight:700;color:#1F8A4C;margin-bottom:10px;}
+  .priority-card p{font-size:12.5px;color:#5B6A80;margin:0 0 16px;flex:1;}
+  .btn-outline-navy{
+    border:1.5px solid var(--teal-deep);color:var(--teal-deep);background:transparent;
+    padding:9px 16px;border-radius:8px;font-weight:700;font-size:13px;
+  }
+  .btn-outline-navy:hover{background:var(--teal-deep);color:var(--white);}
+
+  /* ---- Page navigation ---- */
+  .page{display:none;}
+  .page.active{display:block;animation:fadeIn .35s ease;}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+  /* ---- Section shell ---- */
+  section{padding:76px 0;}
+  .section-head{max-width:640px;margin:0 0 44px;}
+  .section-eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--amber-deep);font-weight:700;margin-bottom:10px;}
+  .section-head h2{font-size:clamp(24px,3vw,32px);font-weight:600;margin:0 0 12px;}
+  .section-head p{color:#3E5652;max-width:560px;}
+
+  /* ---- Alur (steps) ---- */
+  .steps{background:var(--paper-soft);}
+  .step-row{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;}
+  @media (max-width:960px){.step-row{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:560px){.step-row{grid-template-columns:1fr 1fr;}}
+  .step{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 16px;position:relative;
+  }
+  .step .num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--amber-deep);font-weight:600;}
+  .step h3{font-size:15px;margin:10px 0 6px;font-weight:700;font-family:'Plus Jakarta Sans',sans-serif;}
+  .step p{font-size:13px;color:#556865;margin:0;}
+
+  /* ---- Persyaratan umum ---- */
+  .req-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  @media (max-width:760px){.req-grid{grid-template-columns:1fr;}}
+  .req-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:22px;display:flex;gap:14px;align-items:flex-start;
+  }
+  .req-card .icon{width:40px;height:40px;flex:none;color:var(--teal);}
+  .req-card h3{margin:0 0 6px;font-size:16px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;}
+  .req-card p{margin:0;font-size:13.5px;color:#556865;}
+
+  /* ---- Layanan grid ---- */
+  .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  @media (max-width:960px){.service-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.service-grid{grid-template-columns:1fr;}}
+  .service-card{
+    background:var(--white);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px;text-align:left;display:flex;flex-direction:column;gap:12px;
+    transition:border-color .18s, transform .18s, box-shadow .18s;
+  }
+  .service-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:0 10px 24px -14px rgba(14,59,58,.35);}
+  .service-card .icon{width:30px;height:30px;color:var(--teal);}
+  .service-card h3{margin:0;font-size:14.5px;font-weight:700;line-height:1.35;}
+  .service-card .go{
+    margin-top:auto;font-size:12.5px;font-weight:700;color:var(--amber-deep);
+    display:flex;align-items:center;gap:6px;
+  }
+
+  /* ---- Upload ---- */
+  .upload-panel{
+    background:var(--teal-deep);color:var(--paper-soft);border-radius:20px;
+    padding:40px;display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;
+  }
+  @media (max-width:860px){.upload-panel{grid-template-columns:1fr;padding:28px;}}
+  .upload-panel h2{color:var(--paper-soft);}
+  .upload-panel .section-eyebrow{color:var(--amber);}
+  .field{margin-bottom:16px;}
+  .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#CFE3DF;}
+  select,textarea,input[type=text],input[type=date]{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid rgba(245,238,221,.25);
+    background:rgba(245,238,221,.06);color:var(--paper-soft);font-family:inherit;font-size:14px;
+  }
+  select option{color:#111;}
+  .dropzone{
+    border:1.5px dashed rgba(245,238,221,.4);border-radius:14px;padding:26px 18px;text-align:center;
+    background:rgba(245,238,221,.04);transition:border-color .2s,background .2s;
+  }
+  .dropzone.drag{border-color:var(--amber);background:rgba(227,161,59,.1);}
+  .dropzone p{margin:8px 0 0;font-size:13px;color:#CFE3DF;}
+  .filelist{list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:8px;}
+  .filelist li{
+    display:flex;align-items:center;justify-content:space-between;
+    background:rgba(245,238,221,.08);border-radius:9px;padding:9px 12px;font-size:12.5px;
+  }
+  .filelist button{background:none;border:none;color:#E7A9A0;font-weight:700;font-size:13px;}
+  .req-hint{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .chip{
+    font-size:11.5px;font-weight:600;padding:6px 12px;border-radius:999px;
+    background:rgba(227,161,59,.15);color:var(--amber);border:1px solid rgba(227,161,59,.35);
+  }
+  .ticket-msg{
+    margin-top:16px;padding:14px 16px;border-radius:12px;background:rgba(111,166,157,.18);
+    border:1px solid rgba(111,166,157,.4);font-size:13.5px;display:none;
+  }
+  .ticket-msg.show{display:block;}
+  .ticket-msg .mono{color:var(--amber);}
+
+  /* ---- Aspirasi ---- */
+  .aspirasi-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:32px;}
+  @media (max-width:860px){.aspirasi-grid{grid-template-columns:1fr;}}
+  .form-card{background:var(--white);border:1px solid var(--line);border-radius:var(--radius);padding:26px;}
+  .form-card label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  .form-card select,.form-card textarea,.form-card input[type=text]{
+    border:1px solid var(--line);background:var(--paper-soft);color:var(--ink);
+  }
+  .feed{display:flex;flex-direction:column;gap:12px;max-height:420px;overflow:auto;padding-right:4px;}
+  .feed-item{
+    background:var(--white);border:1px solid var(--line);border-left:4px solid var(--amber);
+    border-radius:10px;padding:14px 16px;font-size:13.5px;
+  }
+  .feed-item .meta{font-size:11.5px;color:#7A8C89;margin-bottom:4px;display:flex;gap:8px;}
+  .feed-empty{font-size:13px;color:#7A8C89;font-style:italic;}
+
+  /* ---- Footer ---- */
+  footer{background:#111827;color:#CBD5E1;padding:16px 0;margin-top:0;}
+  .footer-bottom{font-size:12.5px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+  .footer-bottom b{color:#fff;font-weight:700;}
+
+  /* ======== Admin TTE Dashboard ======== */
+  #admin{background:var(--paper);}
+  .admin-header{background:var(--teal-deep);color:#fff;padding:14px 24px;}
+  .admin-header-inner{display:flex;justify-content:space-between;align-items:center;max-width:1400px;margin:0 auto;flex-wrap:wrap;gap:12px;}
+  .admin-brand{display:flex;align-items:center;gap:12px;}
+  .admin-brand svg{width:36px;height:36px;flex:none;}
+  .admin-brand .name{font-weight:800;font-size:14.5px;letter-spacing:.01em;}
+  .admin-brand .eyebrow{font-size:10.5px;color:var(--amber);letter-spacing:.06em;text-transform:uppercase;margin-top:2px;}
+  .admin-user{display:flex;align-items:center;gap:14px;font-size:13px;flex-wrap:wrap;}
+  .admin-user .who b{color:#fff;}
+  .badge-queue{background:#D64545;color:#fff;padding:6px 13px;border-radius:999px;font-weight:800;font-size:12px;white-space:nowrap;}
+  .btn-keluar{background:var(--amber);color:var(--teal-deep);border:none;padding:9px 20px;border-radius:8px;font-weight:800;font-size:13px;}
+  .btn-keluar:hover{background:var(--amber-deep);}
+
+  .admin-strip{background:#0E356B;color:#D9E2F0;font-size:12px;padding:9px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;max-width:1400px;margin:0 auto;}
+  .dot-live{width:8px;height:8px;border-radius:50%;background:#3ECF6E;display:inline-block;margin-right:6px;}
+
+  .admin-body{display:flex;max-width:1400px;margin:0 auto;align-items:flex-start;}
+  .admin-sidebar{width:230px;flex:none;padding:20px 14px;background:#fff;border-right:1px solid var(--line);min-height:70vh;}
+  @media (max-width:900px){.admin-sidebar{display:none;}}
+  .admin-sidebar h5{font-size:10.5px;letter-spacing:.1em;color:#8792A6;text-transform:uppercase;margin:0 0 12px;padding:0 6px;}
+  .admin-menu-item{display:flex;align-items:center;justify-content:space-between;padding:11px 12px;border-radius:8px;font-size:13px;font-weight:700;color:#374357;cursor:pointer;margin-bottom:4px;}
+  .admin-menu-item:hover{background:#F1F4F9;}
+  .admin-menu-item.active{background:var(--amber);color:var(--teal-deep);}
+  .admin-menu-item .count{background:rgba(0,0,0,.1);padding:2px 8px;border-radius:999px;font-size:11px;}
+  .admin-menu-item.active .count{background:rgba(255,255,255,.55);}
+  .admin-side-note{margin-top:18px;background:var(--teal-deep);color:#D9E2F0;border-radius:10px;padding:14px;font-size:11.5px;line-height:1.65;}
+  .admin-side-note b{color:var(--amber);}
+
+  .admin-main{flex:1;padding:24px;min-width:0;}
+  .admin-main-head{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;margin-bottom:18px;}
+  .admin-main-head h2{margin:0 0 4px;font-size:19px;}
+  .admin-main-head p{margin:0;font-size:13px;color:#5B6A80;max-width:560px;}
+  .admin-datebadge{background:var(--teal-deep);color:#fff;padding:9px 14px;border-radius:8px;font-size:12px;font-weight:700;white-space:nowrap;}
+
+  .admin-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px;}
+  @media (max-width:900px){.admin-stats{grid-template-columns:repeat(2,1fr);}}
+  .stat-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;align-items:center;gap:12px;}
+  .stat-card .num{font-size:21px;font-weight:800;line-height:1.1;}
+  .stat-card .label{font-size:11px;color:#5B6A80;}
+  .stat-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:17px;flex:none;}
+
+  .admin-banner{background:#E9F8EE;border:1px solid #BEE9CB;color:#1F5B34;border-radius:10px;padding:13px 16px;font-size:13px;margin-bottom:20px;line-height:1.55;}
+
+  .admin-cols{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px;margin-bottom:20px;}
+  @media (max-width:980px){.admin-cols{grid-template-columns:1fr;}}
+  .queue-panel,.preview-panel,.history-panel{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  .panel-head{padding:13px 16px;border-bottom:1px solid var(--line);font-weight:800;font-size:13px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;}
+  .chip-count{background:var(--amber);color:var(--teal-deep);font-size:11px;padding:3px 10px;border-radius:999px;font-weight:800;}
+  .queue-list{max-height:520px;overflow:auto;}
+  .queue-item{padding:12px 16px;border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:flex-start;cursor:pointer;}
+  .queue-item:hover{background:#F7F9FC;}
+  .queue-item.selected{background:#FFF7E6;}
+  .queue-num{width:23px;height:23px;border-radius:50%;background:var(--teal-deep);color:#fff;font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:none;margin-top:1px;}
+  .queue-item .qi-body{flex:1;min-width:0;}
+  .queue-item .qi-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start;}
+  .queue-item .qi-name{font-weight:800;font-size:13px;}
+  .queue-item .qi-jenis{font-size:12px;color:#374357;margin-top:1px;}
+  .queue-item .qi-meta{font-size:11px;color:#7A8AA0;margin-top:3px;}
+  .status-pill{font-size:10px;font-weight:800;padding:3px 9px;border-radius:999px;white-space:nowrap;}
+  .status-pill.siap{background:#E3F6E9;color:#1F8A4C;}
+  .status-pill.menunggu{background:#FFF2D6;color:#A9800E;}
+  .status-pill.selesai{background:#E3F6E9;color:#1F8A4C;}
+  .status-pill.dikembalikan{background:#FCE4E4;color:#B3261E;}
+
+  .doc-preview{padding:20px;font-size:12px;color:#20304D;max-height:520px;overflow:auto;}
+  .letterhead{display:flex;gap:12px;border-bottom:2px solid var(--teal-deep);padding-bottom:12px;margin-bottom:14px;align-items:center;}
+  .letterhead svg{width:38px;height:38px;flex:none;}
+  .letterhead b{display:block;font-size:12px;}
+  .doc-title{text-align:center;font-weight:800;font-size:13.5px;text-decoration:underline;margin:16px 0 4px;}
+  .doc-num{text-align:center;font-size:11px;color:#7A8AA0;margin-bottom:16px;}
+  .doc-field{display:grid;grid-template-columns:130px 10px 1fr;gap:2px;font-size:12px;margin-bottom:5px;}
+  .doc-field b{font-weight:700;}
+  .sign-box{margin-top:20px;border:1.5px solid #BEE9CB;background:#F3FBF5;border-radius:10px;padding:14px;text-align:center;}
+  .sign-box .st{font-size:10.5px;font-weight:800;color:#1F8A4C;letter-spacing:.03em;}
+  .sign-box .who{font-weight:800;font-size:13px;margin-top:4px;}
+  .sign-box .meta{font-size:10.5px;color:#5B6A80;margin-top:2px;}
+
+  .sign-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;margin-bottom:20px;position:relative;}
+  .sign-panel-title{font-weight:800;font-size:14px;margin-bottom:14px;}
+  .sign-panel-top{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:18px;}
+  @media (max-width:760px){.sign-panel-top{grid-template-columns:1fr;}}
+  .sp-box{background:#F7F9FC;border-radius:10px;padding:12px 14px;}
+  .sp-box .l{font-size:10px;color:#7A8AA0;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;}
+  .sp-box .v{font-weight:800;font-size:13px;}
+
+  .alur-box{border:1.5px dashed var(--amber);border-radius:12px;padding:18px;text-align:center;margin-bottom:18px;background:rgba(212,160,23,.05);}
+  .alur-box .title{font-weight:800;font-size:13px;margin-bottom:4px;}
+  .alur-box .sub{font-size:11.5px;color:#5B6A80;margin-bottom:14px;line-height:1.5;}
+  .alur-steps{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;}
+  .alur-step{font-size:11px;font-weight:800;padding:6px 12px;border-radius:999px;}
+  .alur-step.done{background:#E3F6E9;color:#1F8A4C;}
+  .alur-step.current{background:var(--amber);color:var(--teal-deep);}
+  .alur-step.next{background:#EEF1F5;color:#8792A6;}
+
+  .sign-actions{display:flex;gap:12px;flex-wrap:wrap;}
+  .sign-actions button{font-family:inherit;border-radius:10px;font-weight:800;padding:15px 18px;font-size:13px;cursor:pointer;}
+  .btn-sign-now{flex:1.4;background:var(--teal-deep);color:#fff;border:none;min-width:240px;}
+  .btn-sign-now:hover{background:var(--ink);}
+  .btn-sign-now:disabled{opacity:.5;cursor:not-allowed;}
+  .btn-skip{flex:1;background:var(--amber);color:var(--teal-deep);border:none;min-width:180px;}
+  .btn-skip:hover{background:var(--amber-deep);}
+  .btn-return{flex:1;background:#fff;color:#B3261E;border:1.5px solid #F1B7B3;min-width:180px;}
+  .btn-return:hover{background:#FDEDEC;}
+
+  .sign-toast{
+    position:absolute;top:-14px;left:20px;right:20px;background:#1F8A4C;color:#fff;border-radius:10px;
+    padding:12px 16px;font-size:13px;font-weight:600;box-shadow:0 10px 24px -10px rgba(31,138,76,.5);
+    display:none;z-index:5;
+  }
+  .sign-toast.show{display:block;}
+
+  table.riwayat{width:100%;border-collapse:collapse;font-size:12px;}
+  table.riwayat th{text-align:left;background:#F7F9FC;padding:10px 14px;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:#7A8AA0;}
+  table.riwayat td{padding:11px 14px;border-top:1px solid var(--line);}
+
+  .sign-panel .field label{display:block;font-size:12.5px;font-weight:700;margin-bottom:6px;color:#374357;}
+  .sign-panel .field input[type=text]{border:1px solid var(--line);background:#F7F9FC;color:#374357;}
+  .placeholder-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:50px 30px;text-align:center;color:#5B6A80;font-size:14px;line-height:1.7;}
+  .placeholder-panel .pico{font-size:30px;display:block;margin-bottom:10px;}
+  .placeholder-panel b{color:var(--ink);font-size:15.5px;}
+
+  /* Modal */
+  .modal-overlay{
+    position:fixed;inset:0;background:rgba(14,26,25,.55);display:none;align-items:center;justify-content:center;
+    padding:20px;z-index:100;
+  }
+  .modal-overlay.show{display:flex;}
+  .modal{background:var(--white);border-radius:16px;max-width:460px;width:100%;padding:28px;position:relative;}
+  .modal-close{position:absolute;top:14px;right:14px;background:none;border:none;font-size:20px;color:#7A8C89;}
+  .modal h3{margin:0 0 6px;font-size:19px;}
+  .modal .modal-tag{font-size:12px;color:var(--amber-deep);font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;}
+  .modal input[type=text],.modal input[type=email],.modal input[type=password]{
+    width:100%;padding:11px 13px;border-radius:10px;border:1px solid var(--line);
+    background:var(--paper-soft);color:var(--ink);font-family:inherit;font-size:14px;
+  }
+  .modal .field{margin-bottom:14px;}
+  .modal .field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;}
+  .auth-tabs{display:flex;gap:8px;margin-bottom:18px;background:var(--paper);border-radius:10px;padding:4px;}
+  .auth-tab{flex:1;background:none;border:none;padding:9px;border-radius:8px;font-weight:700;font-size:13px;color:#7A8C99;}
+  .auth-tab.active{background:var(--teal-deep);color:#fff;}
+  .auth-error{font-size:12.5px;padding:10px 12px;border-radius:8px;background:#FFF3F4;margin-bottom:14px;}
+  .user-badge{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;}
+  .modal ul{margin:14px 0 22px;padding-left:18px;font-size:13.5px;color:#3E5652;}
+  .modal ul li{margin-bottom:5px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-top">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 46 46" fill="none">
+        <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/>
+        <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="none" stroke="#D4A017" stroke-width="1.6"/>
+        <path d="M11 24c3.5-7 8-11 12-11s8.5 4 12 11" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+        <path d="M9 30c4-6.5 9-10 14-10s10 3.5 14 10" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" opacity=".5" fill="none"/>
+        <path d="M23 9 L25.2 14.2 L30.8 14.6 L26.5 18.2 L27.9 23.6 L23 20.6 L18.1 23.6 L19.5 18.2 L15.2 14.6 L20.8 14.2 Z" fill="#D4A017"/>
+      </svg>
+      <div class="brand-text">
+        <div class="name">Portal Pelayanan Publik<br>Kelurahan Watang Soreang</div>
+        <div class="eyebrow">Pemerintah Kota Parepare • Sistem Pemerintahan Berbasis Elektronik (SPBE)</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="btn-mini" id="btnLogin" type="button">Login</button>
+      <button class="btn-mini" id="btnSignup" type="button">Sign Up</button>
+      <span class="user-badge" id="userBadge" style="display:none;">
+        <span id="userBadgeName"></span>
+        <button class="btn-mini outline" id="btnLogout" type="button">Keluar</button>
+      </span>
+      <button class="nav-toggle" id="navToggle" aria-label="Buka menu">☰</button>
+    </div>
+  </div>
+  <div class="header-nav-row">
+    <nav id="nav">
+      <a href="#" data-page="beranda" class="nav-link active">Beranda</a>
+      <a href="#" data-page="alur" class="nav-link">Alur Layanan</a>
+      <a href="#" data-page="persyaratan" class="nav-link">Persyaratan</a>
+      <a href="#" data-page="layanan" class="nav-link">Layanan Surat</a>
+      <a href="#" data-page="unggah" class="nav-link">Unggah Berkas</a>
+      <a href="#" data-page="aspirasi" class="nav-link">Aspirasi</a>
+      <a href="#" id="navTTE" class="nav-link" style="display:none;">Tanda Tangan Digital (Kepala Lurah)</a>
+      <a href="#" id="navStaf" class="nav-link" style="display:none;">Verifikasi Berkas (Staf)</a>
+    </nav>
+  </div>
+</header>
+
+<div class="page active" id="beranda">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <h1>Layanan surat mudah dan cepat dari rumah</h1>
+      <p class="lead">Memotong rantai birokrasi konvensional. Urus berkas administrasi persuratan Anda secara mandiri melalui sistem online tanpa perlu datang bolak-balik hanya untuk menanyakan persyaratan.</p>
+      <div class="hero-actions">
+        <a href="#" data-page="layanan" class="btn btn-amber">Mulai Pengajuan Online →</a>
+      </div>
+    </div>
+    <div class="spbe-box">
+      <div class="tag">Integrasi SPBE</div>
+      <p>Otomatisasi Sistem Berbasis Tanda Tangan Elektronik (TTE)</p>
+    </div>
+  </div>
+</section>
+
+<div class="feature-row-wrap">
+  <div class="wrap feature-row">
+    <div class="feature-card">
+      <div class="flabel">🗂️ 1. Katalog &amp; Syarat Surat</div>
+      <p>Transparansi dokumen persyaratan (KTP, KK, Pengantar RT/RW) serta unduhan formulir pernyataan agar berkas lengkap sekali datang.</p>
+      <a href="#" data-page="persyaratan" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Buka Katalog Syarat</a>
+    </div>
+    <div class="feature-card">
+      <div class="flabel">📝 2. Pengajuan Surat Mandiri</div>
+      <p>Isi formulir elektronik dan unggah langsung jepretan foto dokumen persyaratan Anda menggunakan kamera HP dari rumah tanpa antre.</p>
+      <a href="#" data-page="unggah" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Isi Form Mandiri</a>
+    </div>
+    <div class="feature-card">
+      <div class="flabel">📣 3. Kotak Pengaduan "Wiku"</div>
+      <p>Media aspirasi, kritik, dan laporan pengawasan masyarakat demi peningkatan responsivitas dan perwujudan tata kelola Good Governance.</p>
+      <a href="#" data-page="aspirasi" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Kirim Aspirasi</a>
+    </div>
+  </div>
+</div>
+
+<div class="priority-wrap">
+  <div class="wrap">
+    <div class="priority-head">
+      <div class="bar"></div>
+      <h2>Jenis Pelayanan Surat Berfrekuensi Tertinggi (Respons Cepat 10–15 Menit)</h2>
+    </div>
+    <div class="priority-grid" id="priorityGrid"></div>
+  </div>
+</div>
+</div>
+
+<section class="steps page" id="alur">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Alur Layanan</div>
+      <h2>Enam langkah dari berkas sampai surat terbit</h2>
+      <p>Setiap permohonan mengikuti urutan yang sama, supaya warga tahu persis di tahap mana berkasnya berada.</p>
+    </div>
+    <div class="step-row">
+      <div class="step"><div class="num">01</div><h3>Siapkan Berkas</h3><p>KTP, KK, dan Surat Pengantar RT.</p></div>
+      <div class="step"><div class="num">02</div><h3>Pilih Jenis Surat</h3><p>Tentukan dari 10 layanan yang tersedia.</p></div>
+      <div class="step"><div class="num">03</div><h3>Unggah Berkas</h3><p>Kirim berkas langsung lewat formulir daring.</p></div>
+      <div class="step"><div class="num">04</div><h3>Verifikasi Petugas</h3><p>Kelengkapan dan kesesuaian data diperiksa.</p></div>
+      <div class="step"><div class="num">05</div><h3>Tanda Tangan Digital</h3><p>Lurah menandatangani dari kantor atau luar kantor.</p></div>
+      <div class="step"><div class="num">06</div><h3>Surat Terbit</h3><p>Notifikasi dikirim, surat siap diambil/diunduh.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="persyaratan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Berlaku untuk Semua Layanan</div>
+      <h2>Persyaratan umum</h2>
+      <p>Ketiga dokumen ini menjadi dasar data untuk seluruh jenis surat keterangan di bawah.</p>
+    </div>
+    <div class="req-grid">
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="12" r="2.4"/><path d="M14 10h4M14 14h3"/></svg>
+        <div><h3>KTP</h3><p>Kartu Tanda Penduduk elektronik pemohon yang masih berlaku.</p></div>
+      </div>
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h8M8 17h5"/></svg>
+        <div><h3>Kartu Keluarga</h3><p>KK terbaru yang mencantumkan nama pemohon.</p></div>
+      </div>
+      <div class="req-card">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 3v18M7 5h10l-2 3 2 3H7"/></svg>
+        <div><h3>Surat Pengantar RT</h3><p>Diketahui Ketua RT setempat sebagai dasar pengajuan.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="layanan">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">10 Jenis Layanan</div>
+      <h2>Surat keterangan yang tersedia</h2>
+      <p>Pilih salah satu untuk melihat rincian, lalu lanjutkan ke formulir unggah berkas.</p>
+    </div>
+    <div class="service-grid" id="serviceGrid"></div>
+  </div>
+</section>
+
+<section class="page" id="unggah">
+  <div class="wrap">
+    <div class="upload-panel">
+      <div>
+        <div class="section-eyebrow">Formulir Daring</div>
+        <h2>Unggah berkas persyaratan</h2>
+        <p style="color:#CFE3DF;font-size:14px;max-width:380px;">Berkas yang dikirim di sini menjadi acuan data petugas untuk menyiapkan seluruh jenis surat keterangan.</p>
+        <div class="req-hint">
+          <span class="chip">KTP</span><span class="chip">KK</span><span class="chip">Surat Pengantar RT</span>
+        </div>
+      </div>
+      <div>
+        <div class="field">
+          <label for="jenisSurat">Jenis Surat</label>
+          <select id="jenisSurat"></select>
+        </div>
+        <div class="field">
+          <label for="namaPemohon">Nama Pemohon</label>
+          <input type="text" id="namaPemohon" placeholder="Nama sesuai KTP">
+        </div>
+        <div class="field">
+          <label for="nikPemohon">NIK</label>
+          <input type="text" id="nikPemohon" placeholder="16 digit NIK sesuai KTP" maxlength="16" inputmode="numeric">
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="field">
+            <label for="tempatLahir">Tempat Lahir</label>
+            <input type="text" id="tempatLahir" placeholder="Parepare">
+          </div>
+          <div class="field">
+            <label for="tglLahir">Tanggal Lahir</label>
+            <input type="date" id="tglLahir">
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div class="field">
+            <label for="jenisKelamin">Jenis Kelamin</label>
+            <select id="jenisKelamin">
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="agamaPemohon">Agama</label>
+            <select id="agamaPemohon">
+              <option>Islam</option><option>Kristen</option><option>Katolik</option>
+              <option>Hindu</option><option>Buddha</option><option>Konghucu</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="statusPemohon">Status Perkawinan</label>
+          <select id="statusPemohon">
+            <option>Belum Kawin</option><option>Kawin</option><option>Cerai Hidup</option><option>Cerai Mati</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="alamatPemohon">Alamat Lengkap</label>
+          <textarea id="alamatPemohon" rows="2" placeholder="Jl. ..., RT/RW, Kelurahan Watang Soreang"></textarea>
+        </div>
+        <div class="field">
+          <label>Berkas (KTP, KK, Surat Pengantar RT)</label>
+          <div class="dropzone" id="dropzone">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E3A13B" stroke-width="1.7" style="margin:0 auto;"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
+            <p>Seret berkas ke sini, atau <label for="fileInput" style="color:#E3A13B;text-decoration:underline;cursor:pointer;">pilih file</label></p>
+            <input type="file" id="fileInput" multiple style="display:none;">
+          </div>
+          <ul class="filelist" id="fileList"></ul>
+        </div>
+        <button class="btn btn-amber" id="submitUpload" style="width:100%;justify-content:center;">Kirim Permohonan</button>
+        <div class="ticket-msg" id="ticketMsg"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="page" id="aspirasi">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-eyebrow">Suara Warga</div>
+      <h2>Sampaikan aspirasi</h2>
+      <p>Masukan, keluhan, atau usulan warga akan menjadi catatan bagi kelurahan untuk perbaikan layanan.</p>
+    </div>
+    <div class="aspirasi-grid">
+      <div class="form-card">
+        <div class="field"><label for="aspNama">Nama (opsional)</label><input type="text" id="aspNama" placeholder="Boleh dikosongkan"></div>
+        <div class="field">
+          <label for="aspKategori">Kategori</label>
+          <select id="aspKategori">
+            <option>Layanan Persuratan</option>
+            <option>Infrastruktur Lingkungan</option>
+            <option>Kebersihan</option>
+            <option>Keamanan</option>
+            <option>Lainnya</option>
+          </select>
+        </div>
+        <div class="field"><label for="aspIsi">Aspirasi</label><textarea id="aspIsi" rows="4" placeholder="Tuliskan aspirasi Anda..."></textarea></div>
+        <button class="btn btn-dark" id="kirimAspirasi" style="width:100%;justify-content:center;">Kirim Aspirasi</button>
+      </div>
+      <div>
+        <div class="feed" id="feed">
+          <p class="feed-empty">Belum ada aspirasi masuk hari ini.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-tag" id="modalTag">Layanan Surat</div>
+    <h3 id="modalTitle"></h3>
+    <p style="font-size:13.5px;color:#556865;margin:6px 0 0;" id="modalDesc"></p>
+    <ul>
+      <li>KTP pemohon</li>
+      <li>Kartu Keluarga (KK)</li>
+      <li>Surat Pengantar dari RT</li>
+    </ul>
+    <button class="btn btn-amber" id="modalAjukan" style="width:100%;justify-content:center;">Lanjut Unggah Berkas</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="authOverlay">
+  <div class="modal" style="max-width:380px;">
+    <button class="modal-close" id="authClose">✕</button>
+    <div class="auth-tabs">
+      <button type="button" class="auth-tab active" data-tab="login">Masuk</button>
+      <button type="button" class="auth-tab" data-tab="signup">Daftar</button>
+    </div>
+    <div class="auth-error" id="authError" style="display:none;"></div>
+    <form id="authForm">
+      <div class="field" id="authNamaField" style="display:none;">
+        <label for="authNama">Nama Lengkap</label>
+        <input type="text" id="authNama" placeholder="Nama sesuai KTP">
+      </div>
+      <div class="field">
+        <label for="authEmail">Email</label>
+        <input type="text" id="authEmail" placeholder="nama@email.com">
+      </div>
+      <div class="field">
+        <label for="authPassword">Kata Sandi</label>
+        <input type="password" id="authPassword" placeholder="Minimal 6 karakter">
+      </div>
+      <button type="submit" class="btn btn-amber" id="authSubmit" style="width:100%;justify-content:center;">Masuk</button>
+    </form>
+    <p style="font-size:11.5px;color:#8290A5;margin-top:12px;">Akun Staf/Kepala Lurah dibuat oleh admin sistem, bukan lewat pendaftaran mandiri.</p>
+  </div>
+</div>
+
+<div class="page" id="admin">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg viewBox="0 0 46 46" fill="none">
+          <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/>
+          <path d="M11 24c3.5-7 8-11 12-11s8.5 4 12 11" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <path d="M23 9 L25.2 14.2 L30.8 14.6 L26.5 18.2 L27.9 23.6 L23 20.6 L18.1 23.6 L19.5 18.2 L15.2 14.6 L20.8 14.2 Z" fill="#D4A017"/>
+        </svg>
+        <div>
+          <div class="name">PORTAL PELAYANAN PUBLIK KELURAHAN WATANG SOREANG</div>
+          <div class="eyebrow">Pemerintah Kota Parepare • Sistem Pemerintahan Berbasis Elektronik (SPBE)</div>
+        </div>
+      </div>
+      <div class="admin-user">
+        <span class="who">👤 Kepala Lurah: <b>H. Irwan, S.Sos</b></span>
+        <span class="badge-queue">🔔 <span id="adminQueueBadge">5</span> Antrian TTE</span>
+        <button class="btn-keluar" id="btnKeluarAdmin" type="button">Keluar</button>
+      </div>
+    </div>
+  </div>
+  <div class="admin-strip">
+    <span><span class="dot-live"></span>Sistem TTE Aktif — Tanda Tangan Elektronik terenkripsi sesuai Perpres No.95/2018 tentang SPBE &amp; Perda Kota Parepare No.9/2023</span>
+    <span>📍 Lokasi Akses: Dapat digunakan dari mana saja • Perangkat: HP / Laptop / Tablet</span>
+  </div>
+
+  <div class="admin-body">
+    <aside class="admin-sidebar">
+      <h5>Menu Kepala Lurah</h5>
+      <div class="admin-menu-item active" data-admin="antrian">Antrian TTE <span class="count" id="menuCountAntrian">5</span></div>
+      <div class="admin-menu-item" data-admin="riwayat">Sudah di-TTE <span class="count">18</span></div>
+      <div class="admin-menu-item" data-admin="rekap">Rekap Bulanan</div>
+      <div class="admin-menu-item" data-admin="pengaturan">Pengaturan TTE</div>
+      <div class="admin-menu-item" id="btnKembaliBeranda">Kembali ke Beranda</div>
+      <div class="admin-side-note">
+        <b>⚡ Keunggulan TTE</b><br>
+        Kepala Lurah <b>tidak perlu hadir fisik</b> di kantor. Surat dapat ditandatangani dari mana saja menggunakan perangkat apapun secara aman dan terenkripsi.
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div id="adminView-antrian" class="admin-view">
+        <div class="admin-main-head">
+          <div>
+            <h2>✍️ Antrian Tanda Tangan Elektronik (TTE)</h2>
+            <p>Pratinjau dan tandatangani dokumen surat warga secara elektronik dari mana saja. Surat otomatis terbit &amp; notifikasi WhatsApp dikirim ke warga setelah TTE berhasil.</p>
+          </div>
+          <div class="admin-datebadge" id="adminDateBadge">📅 —</div>
+        </div>
+
+        <div class="admin-stats">
+          <div class="stat-card"><div class="stat-icon" style="background:#FFF2D6;">📝</div><div><div class="num" id="statMenunggu">5</div><div class="label">Menunggu TTE Hari Ini</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E3F6E9;">✅</div><div><div class="num" id="statSelesai">18</div><div class="label">Sudah di-TTE Bulan Ini</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E4ECFB;">⏱</div><div><div class="num">±3</div><div class="label">Menit Rata-rata Proses</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#FCE4E4;">📲</div><div><div class="num">100%</div><div class="label">Notif WA Terkirim</div></div></div>
+        </div>
+
+        <div class="admin-banner">📥 <b>Notifikasi Masuk:</b> <span id="statMenunggu2">5</span> dokumen telah diverifikasi oleh Staf Pelayanan dan siap untuk ditandatangani secara elektronik. Setelah TTE selesai, surat akan otomatis terbit dan notifikasi WhatsApp langsung dikirim kepada pemohon.</div>
+
+        <div class="admin-cols">
+          <div class="queue-panel">
+            <div class="panel-head">📋 Daftar Antrian TTE <span class="chip-count" id="queueCountChip">5 Dokumen</span></div>
+            <div class="queue-list" id="queueList"></div>
+          </div>
+          <div class="preview-panel">
+            <div class="panel-head">📄 Pratinjau Dokumen — <span id="previewName" style="color:var(--amber-deep);"></span></div>
+            <div class="doc-preview" id="docPreview"></div>
+          </div>
+        </div>
+
+        <div class="sign-panel">
+          <div class="sign-toast" id="signToast"></div>
+          <div class="sign-panel-title">🖋 Panel Tanda Tangan Elektronik — <span id="signPanelName" style="color:var(--amber-deep);"></span></div>
+          <div class="sign-panel-top">
+            <div class="sp-box"><div class="l">Nama Pemohon</div><div class="v" id="spNama">—</div></div>
+            <div class="sp-box"><div class="l">Jenis Surat</div><div class="v" id="spJenis">—</div></div>
+            <div class="sp-box"><div class="l">Status Berkas</div><div class="v" style="color:#1F8A4C;">✅ Lengkap — 4 dari 4 Berkas</div></div>
+          </div>
+          <div class="alur-box">
+            <div class="title">🔐 Alur Tanda Tangan Elektronik (TTE) — Integrasi SPBE</div>
+            <div class="sub">Proses TTE sepenuhnya digital dan terenkripsi. Kepala Lurah tidak perlu hadir fisik di kantor. Setelah tombol TTE ditekan, surat terbit otomatis dan notifikasi WhatsApp langsung dikirim ke pemohon.</div>
+            <div class="alur-steps">
+              <span class="alur-step done">✔ 1. Staf Verifikasi Berkas</span>
+              <span class="alur-step done">✔ 2. Diteruskan ke Lurah</span>
+              <span class="alur-step current">● 3. Lurah TTE (Sekarang)</span>
+              <span class="alur-step next">4. Notif WA ke Warga</span>
+            </div>
+          </div>
+          <div class="sign-actions">
+            <button class="btn-sign-now" id="btnSignNow" type="button">🖋 Tanda Tangani Elektronik (TTE) Sekarang</button>
+            <button class="btn-skip" id="btnSkip" type="button">⏭ Lewati — Tanda Tangani Berikutnya</button>
+            <button class="btn-return" id="btnReturn" type="button">✕ Kembalikan ke Staf</button>
+          </div>
+        </div>
+
+        <div class="history-panel">
+          <div class="panel-head">🕒 Riwayat TTE Hari Ini — <span id="riwayatDateLabel">—</span></div>
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu TTE</th><th>Status</th><th>Notif WA</th></tr></thead>
+              <tbody id="riwayatBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="adminView-riwayat" class="admin-view" style="display:none;">
+        <div class="admin-main-head"><div><h2>✅ Dokumen Sudah di-TTE</h2><p>Daftar surat yang telah selesai ditandatangani secara elektronik hari ini.</p></div></div>
+        <div class="history-panel">
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu TTE</th><th>Status</th><th>Notif WA</th></tr></thead>
+              <tbody id="riwayatBodyFull"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="adminView-rekap" class="admin-view" style="display:none;">
+        <div class="placeholder-panel"><span class="pico">📊</span><b>Rekap Bulanan</b><br>Fitur ini akan menampilkan grafik jumlah TTE per jenis surat dan opsi unduh laporan bulanan.</div>
+      </div>
+
+      <div id="adminView-pengaturan" class="admin-view" style="display:none;">
+        <div class="admin-main-head"><div><h2>⚙️ Pengaturan TTE — Tanda Tangan Elektronik</h2><p>Gambar tanda tangan ini tersimpan di storage privat dan hanya bisa diunggah/dilihat oleh akun Kepala Lurah yang sedang login. Tidak pernah disertakan di dalam kode atau tampilan situs.</p></div></div>
+        <div class="sign-panel">
+          <div class="sign-panel-title">🖋️ Tanda Tangan Tersimpan</div>
+          <div id="sigPreviewWrap" style="margin-bottom:18px;">
+            <p style="font-size:12.5px;color:#7A8AA0;">Memuat...</p>
+          </div>
+          <div class="field" style="max-width:420px;">
+            <label for="sigFile">Unggah / ganti gambar tanda tangan (PNG/JPG, disarankan latar transparan)</label>
+            <input type="text" id="sigFileLabel" readonly placeholder="Belum ada file dipilih" style="cursor:pointer;" onclick="document.getElementById('sigFile').click();">
+            <input type="file" id="sigFile" accept="image/*" style="display:none;">
+          </div>
+          <button class="btn-sign-now" id="btnSaveSignature" type="button" style="max-width:280px;margin-top:6px;">💾 Simpan Tanda Tangan</button>
+          <div class="auth-error" id="sigMsg" style="display:none;margin-top:14px;max-width:420px;"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<div class="page" id="staf">
+  <div class="admin-header">
+    <div class="admin-header-inner">
+      <div class="admin-brand">
+        <svg viewBox="0 0 46 46" fill="none">
+          <path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/>
+          <path d="M11 24c3.5-7 8-11 12-11s8.5 4 12 11" stroke="#F4F6F9" stroke-width="1.4" stroke-linecap="round" fill="none"/>
+          <path d="M23 9 L25.2 14.2 L30.8 14.6 L26.5 18.2 L27.9 23.6 L23 20.6 L18.1 23.6 L19.5 18.2 L15.2 14.6 L20.8 14.2 Z" fill="#D4A017"/>
+        </svg>
+        <div>
+          <div class="name">PORTAL PELAYANAN PUBLIK KELURAHAN WATANG SOREANG</div>
+          <div class="eyebrow">Pemerintah Kota Parepare • Sistem Pemerintahan Berbasis Elektronik (SPBE)</div>
+        </div>
+      </div>
+      <div class="admin-user">
+        <span class="who">👤 Staf Pelayanan: <b id="stafNamaTop">—</b></span>
+        <span class="badge-queue">🔔 <span id="stafQueueBadge">0</span> Menunggu Verifikasi</span>
+        <button class="btn-keluar" id="btnKeluarStaf" type="button">Keluar</button>
+      </div>
+    </div>
+  </div>
+  <div class="admin-strip">
+    <span><span class="dot-live"></span>Sistem Verifikasi Berkas Aktif — berkas warga diperiksa sebelum diteruskan ke Kepala Lurah untuk tanda tangan elektronik</span>
+    <span>📍 Lokasi Akses: Dapat digunakan dari mana saja • Perangkat: HP / Laptop / Tablet</span>
+  </div>
+
+  <div class="admin-body">
+    <aside class="admin-sidebar">
+      <h5>Menu Staf Pelayanan</h5>
+      <div class="admin-menu-item active" data-staf="verifikasi">Verifikasi Berkas <span class="count" id="menuCountVerifikasi">0</span></div>
+      <div class="admin-menu-item" data-staf="riwayat">Riwayat Verifikasi</div>
+      <div class="admin-menu-item" id="btnKembaliBerandaStaf">Kembali ke Beranda</div>
+      <div class="admin-side-note">
+        <b>📋 Tugas Staf</b><br>
+        Periksa kelengkapan KTP, KK, dan Surat Pengantar RT sebelum meneruskan berkas ke Kepala Lurah untuk ditandatangani secara elektronik.
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div id="stafView-verifikasi" class="staf-view">
+        <div class="admin-main-head">
+          <div>
+            <h2>🗂️ Verifikasi Berkas Masuk</h2>
+            <p>Periksa data dan kelengkapan berkas permohonan warga sebelum diteruskan ke Kepala Lurah untuk tanda tangan elektronik.</p>
+          </div>
+          <div class="admin-datebadge" id="stafDateBadge">📅 —</div>
+        </div>
+
+        <div class="admin-stats">
+          <div class="stat-card"><div class="stat-icon" style="background:#FFF2D6;">📥</div><div><div class="num" id="stafStatMenunggu">0</div><div class="label">Menunggu Verifikasi</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#E3F6E9;">✅</div><div><div class="num" id="stafStatVerifikasi">0</div><div class="label">Diverifikasi Hari Ini</div></div></div>
+          <div class="stat-card"><div class="stat-icon" style="background:#FCE4E4;">↩️</div><div><div class="num" id="stafStatKembali">0</div><div class="label">Dikembalikan Hari Ini</div></div></div>
+        </div>
+
+        <div class="admin-banner">📥 <b>Notifikasi Masuk:</b> <span id="stafStatMenunggu2">0</span> permohonan baru dari warga menunggu pemeriksaan kelengkapan berkas.</div>
+
+        <div class="admin-cols">
+          <div class="queue-panel">
+            <div class="panel-head">📋 Daftar Permohonan Masuk <span class="chip-count" id="stafQueueCountChip">0 Dokumen</span></div>
+            <div class="queue-list" id="stafQueueList"></div>
+          </div>
+          <div class="preview-panel">
+            <div class="panel-head">📄 Pratinjau Berkas — <span id="stafPreviewName" style="color:var(--amber-deep);"></span></div>
+            <div class="doc-preview" id="stafDocPreview"></div>
+          </div>
+        </div>
+
+        <div class="sign-panel">
+          <div class="sign-toast" id="stafToast"></div>
+          <div class="sign-panel-title">✅ Panel Verifikasi Berkas — <span id="stafPanelName" style="color:var(--amber-deep);"></span></div>
+          <div class="sign-panel-top">
+            <div class="sp-box"><div class="l">Nama Pemohon</div><div class="v" id="stafSpNama">—</div></div>
+            <div class="sp-box"><div class="l">Jenis Surat</div><div class="v" id="stafSpJenis">—</div></div>
+            <div class="sp-box"><div class="l">Jumlah Berkas</div><div class="v" id="stafSpBerkas">—</div></div>
+          </div>
+          <div class="alur-box">
+            <div class="title">🗂️ Alur Verifikasi Berkas — Integrasi SPBE</div>
+            <div class="sub">Staf memeriksa kesesuaian data dan kelengkapan berkas. Setelah dinyatakan lengkap, permohonan otomatis diteruskan ke antrian tanda tangan elektronik Kepala Lurah.</div>
+            <div class="alur-steps">
+              <span class="alur-step done">✔ 1. Warga Mengajukan</span>
+              <span class="alur-step current">● 2. Staf Verifikasi (Sekarang)</span>
+              <span class="alur-step next">3. Diteruskan ke Lurah</span>
+              <span class="alur-step next">4. Lurah TTE</span>
+            </div>
+          </div>
+          <div class="sign-actions">
+            <button class="btn-sign-now" id="btnVerifikasi" type="button">✅ Verifikasi &amp; Teruskan ke Kepala Lurah</button>
+            <button class="btn-return" id="btnKembalikanWarga" type="button">✕ Kembalikan ke Warga</button>
+          </div>
+        </div>
+
+        <div class="history-panel">
+          <div class="panel-head">🕒 Riwayat Verifikasi Hari Ini</div>
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu</th><th>Status</th></tr></thead>
+              <tbody id="stafRiwayatBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="stafView-riwayat" class="staf-view" style="display:none;">
+        <div class="admin-main-head"><div><h2>📚 Riwayat Verifikasi</h2><p>Seluruh permohonan yang sudah diperiksa oleh Staf Pelayanan.</p></div></div>
+        <div class="history-panel">
+          <div style="overflow-x:auto;">
+            <table class="riwayat">
+              <thead><tr><th>No.</th><th>Nama Pemohon</th><th>Jenis Surat</th><th>Waktu</th><th>Status</th></tr></thead>
+              <tbody id="stafRiwayatBodyFull"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="wrap footer-bottom">
+    <span><b>Kelurahan Watang Soreang</b> • Kecamatan Soreang, Kota Parepare. WhatsApp: 0891-3335-3440</span>
+    <span>Politeknik STIA LAN Makassar © 2026</span>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+// ---------- Supabase client ----------
+const SUPABASE_URL = 'https://dqjoldipdnxzvkkcvavl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_D4pGeZU83wVbUIcB_mzWig_aI4x9Bu1';
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+let currentUser = null;
+let currentProfile = null;
+
+// ---------- data ----------
+const layanan = [
+  {id:'penghasilan', nama:'Surat Keterangan Penghasilan Orang Tua', desc:'Menerangkan besaran penghasilan orang tua/wali sebagai syarat pengajuan beasiswa atau keringanan biaya pendidikan anak.', icon:'<path d="M4 7h16v10H4Z"/><circle cx="12" cy="12" r="2.6"/><path d="M7 7v10M17 7v10"/>'},
+  {id:'kematian', nama:'Surat Keterangan Kematian', desc:'Menerangkan bahwa seorang warga telah meninggal dunia, untuk keperluan administrasi lanjutan.', icon:'<path d="M12 3v6M12 9c-3 0-5 2.5-5 6v3h10v-3c0-3.5-2-6-5-6Z"/><path d="M6 21h12"/>'},
+  {id:'kelahiran', nama:'Surat Keterangan Kelahiran', desc:'Menerangkan kelahiran seorang anak sebagai dasar penerbitan akta kelahiran.', icon:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/>'},
+  {id:'rumah', nama:'Surat Keterangan Pembuatan Rumah', desc:'Menerangkan izin/keterangan pendirian bangunan rumah tinggal warga.', icon:'<path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>'},
+  {id:'nikah', nama:'Surat Keterangan Izin Nikah', desc:'Menerangkan status dan izin warga untuk melangsungkan pernikahan.', icon:'<circle cx="9" cy="14" r="4"/><circle cx="16" cy="10" r="4"/>'},
+  {id:'bedanama', nama:'Surat Keterangan Beda Nama', desc:'Menerangkan perbedaan penulisan nama pada beberapa dokumen kependudukan.', icon:'<path d="M4 7h6M4 12h4"/><path d="M14 17l3-10 3 10"/><path d="M15 14h4"/>'},
+  {id:'tidakmampu', nama:'Surat Keterangan Tidak Mampu', desc:'Menerangkan kondisi ekonomi warga untuk keperluan bantuan sosial/pendidikan.', icon:'<path d="M6 13V7a2 2 0 114 0v5"/><path d="M10 12V5a2 2 0 114 0v7"/><path d="M14 12V7a2 2 0 114 0v6c0 4-2 7-6 7H9c-2 0-3-1-4-3l-1.5-3"/>'},
+  {id:'pdam', nama:'Surat Keterangan Penggunaan Air PDAM', desc:'Menerangkan status penggunaan/pelanggan air PDAM pada suatu alamat.', icon:'<path d="M12 3s6 7 6 11a6 6 0 11-12 0c0-4 6-11 6-11Z"/>'},
+  {id:'ahliwaris', nama:'Surat Keterangan Ahli Waris', desc:'Menerangkan pihak-pihak yang sah sebagai ahli waris dari seorang warga.', icon:'<rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M9 8h6M9 12c0 2 1.5 3 3 3s3-1 3-3M12 15v3"/>'},
+  {id:'penguburan', nama:'Surat Keterangan Penguburan', desc:'Menerangkan izin pemakaman/penguburan jenazah warga di TPU setempat.', icon:'<path d="M7 21V11a5 5 0 0110 0v10"/><path d="M4 21h16"/>'},
+  {id:'domisili', nama:'Surat Keterangan Bertempat Tinggal', desc:'Menerangkan domisili/tempat tinggal warga di wilayah Kelurahan Watang Soreang.', icon:'<path d="M12 21s7-6.5 7-11.5A7 7 0 105 9.5C5 14.5 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/>'}
+];
+
+// ---------- render service cards ----------
+const grid = document.getElementById('serviceGrid');
+layanan.forEach(l=>{
+  const card = document.createElement('button');
+  card.className='service-card';
+  card.type='button';
+  card.innerHTML=`
+    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${l.icon}</svg>
+    <h3>${l.nama}</h3>
+    <span class="go">Lihat detail →</span>`;
+  card.addEventListener('click',()=>openModal(l.id));
+  grid.appendChild(card);
+});
+
+// populate select in upload form
+const jenisSelect = document.getElementById('jenisSurat');
+layanan.forEach(l=>{
+  const opt=document.createElement('option');
+  opt.value=l.id; opt.textContent=l.nama;
+  jenisSelect.appendChild(opt);
+});
+
+// ---------- priority services (homepage) ----------
+const prioritas = [
+  {id:'penghasilan', judul:'SK Penghasilan Orang Tua', waktu:'10 - 15 Menit', desc:'Permohonan paling dominan (10-15 permohonan/hari) untuk kebutuhan beasiswa anak sekolah.'},
+  {id:'nikah', judul:'Surat Keterangan Izin Nikah', waktu:'10 - 15 Menit', desc:'Pengurusan surat pengantar administrasi pernikahan tingkat KUA Kelurahan Watang Soreang.'},
+  {id:'tidakmampu', judul:'SK Tidak Mampu (SKTM)', waktu:'10 - 15 Menit', desc:'Surat jaminan bantuan sosial, layanan kesehatan gratis, dan dispensasi biaya sekolah.'},
+  {id:'pdam', judul:'SK Penggunaan Air PDAM', waktu:'10 - 15 Menit', desc:'Keterangan kelayakan atau pengantar administrasi sambungan air bersih warga Watang Soreang.'}
+];
+const priorityGrid = document.getElementById('priorityGrid');
+prioritas.forEach(p=>{
+  const card=document.createElement('div');
+  card.className='priority-card';
+  card.innerHTML=`
+    <h3>${p.judul}</h3>
+    <div class="time">⏱ ${p.waktu}</div>
+    <p>${p.desc}</p>
+    <button class="btn-outline-navy" type="button">Ajukan Surat</button>`;
+  card.querySelector('button').addEventListener('click',()=>openModal(p.id));
+  priorityGrid.appendChild(card);
+});
+
+function formatTanggalWaktu(){
+  const d = new Date();
+  const tgl = d.toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  const jam = d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+  return {tgl, jam};
+}
+function formatTanggalSaja(){
+  return new Date().toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+}
+(function setDateBadges(){
+  const {tgl, jam} = formatTanggalWaktu();
+  const adminBadge=document.getElementById('adminDateBadge');
+  const stafBadge=document.getElementById('stafDateBadge');
+  const riwayatLabel=document.getElementById('riwayatDateLabel');
+  if(adminBadge) adminBadge.textContent = `📅 ${tgl} | ${jam} WITA`;
+  if(stafBadge) stafBadge.textContent = `📅 ${tgl} | ${jam} WITA`;
+  if(riwayatLabel) riwayatLabel.textContent = formatTanggalSaja();
+})();
+
+// ---------- login / signup (Supabase Auth) ----------
+const authOverlay = document.getElementById('authOverlay');
+const authForm = document.getElementById('authForm');
+const authError = document.getElementById('authError');
+let authMode = 'login';
+
+function openAuth(mode){
+  authMode = mode;
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.toggle('active', t.dataset.tab===mode));
+  document.getElementById('authNamaField').style.display = mode==='signup' ? 'block' : 'none';
+  document.getElementById('authSubmit').textContent = mode==='signup' ? 'Daftar' : 'Masuk';
+  authError.style.display='none';
+  authOverlay.classList.add('show');
+}
+document.getElementById('btnLogin').addEventListener('click',()=>openAuth('login'));
+document.getElementById('btnSignup').addEventListener('click',()=>openAuth('signup'));
+document.getElementById('authClose').addEventListener('click',()=>authOverlay.classList.remove('show'));
+authOverlay.addEventListener('click',e=>{if(e.target===authOverlay) authOverlay.classList.remove('show');});
+document.querySelectorAll('.auth-tab').forEach(t=>t.addEventListener('click',()=>openAuth(t.dataset.tab)));
+
+authForm.addEventListener('submit', async e=>{
+  e.preventDefault();
+  const email=document.getElementById('authEmail').value.trim();
+  const password=document.getElementById('authPassword').value;
+  const nama=document.getElementById('authNama').value.trim();
+  authError.style.display='none';
+  try{
+    if(authMode==='signup'){
+      const {data,error} = await sb.auth.signUp({email,password,options:{data:{nama_lengkap:nama}}});
+      if(error) throw error;
+      if(!data.session){
+        authError.style.display='block';
+        authError.style.background='#E7F6EC'; authError.style.color='#1A5C36';
+        authError.textContent='Pendaftaran berhasil! Jika verifikasi email aktif di project Supabase, cek email dulu sebelum login.';
+        return;
+      }
+    } else {
+      const {data,error} = await sb.auth.signInWithPassword({email,password});
+      if(error) throw error;
+    }
+    authOverlay.classList.remove('show');
+    authForm.reset();
+    await refreshAuthState();
+  } catch(err){
+    authError.style.display='block';
+    authError.style.background='#FFF3F4'; authError.style.color='#B4232C';
+    authError.textContent = err.message || 'Terjadi kesalahan. Coba lagi.';
+  }
+});
+
+async function refreshAuthState(){
+  const {data:{session}} = await sb.auth.getSession();
+  currentUser = session?.user || null;
+  if(currentUser){
+    const {data:profile} = await sb.from('profiles').select('*').eq('id',currentUser.id).single();
+    currentProfile = profile;
+  } else {
+    currentProfile = null;
+  }
+  updateAuthUI();
+}
+
+function updateAuthUI(){
+  const navTTE = document.getElementById('navTTE');
+  const navStaf = document.getElementById('navStaf');
+  if(currentUser && currentProfile){
+    document.getElementById('btnLogin').style.display='none';
+    document.getElementById('btnSignup').style.display='none';
+    document.getElementById('userBadge').style.display='flex';
+    document.getElementById('userBadgeName').textContent = '👤 '+(currentProfile.nama_lengkap || currentUser.email);
+    navTTE.style.display = (currentProfile.role==='lurah' && currentProfile.aktif) ? 'inline' : 'none';
+    navStaf.style.display = (currentProfile.role==='staf' && currentProfile.aktif) ? 'inline' : 'none';
+  } else {
+    document.getElementById('btnLogin').style.display='';
+    document.getElementById('btnSignup').style.display='';
+    document.getElementById('userBadge').style.display='none';
+    navTTE.style.display='none';
+    navStaf.style.display='none';
+  }
+}
+document.getElementById('btnLogout').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  await refreshAuthState();
+  showPage('beranda');
+});
+refreshAuthState();
+
+// ---------- modal ----------
+const overlay=document.getElementById('modalOverlay');
+function openModal(id){
+  const l = layanan.find(x=>x.id===id);
+  document.getElementById('modalTitle').textContent = l.nama;
+  document.getElementById('modalDesc').textContent = l.desc;
+  overlay.classList.add('show');
+  overlay.dataset.current = id;
+}
+document.getElementById('modalClose').addEventListener('click',()=>overlay.classList.remove('show'));
+overlay.addEventListener('click',e=>{if(e.target===overlay) overlay.classList.remove('show');});
+document.getElementById('modalAjukan').addEventListener('click',()=>{
+  jenisSelect.value = overlay.dataset.current;
+  overlay.classList.remove('show');
+  showPage('unggah');
+});
+
+// ---------- page navigation ----------
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  const target = document.getElementById(id);
+  if(target) target.classList.add('active');
+  document.querySelectorAll('.nav-link').forEach(a=>{
+    a.classList.toggle('active', a.dataset.page===id);
+  });
+  window.scrollTo({top:0, behavior:'instant' in document.documentElement.style ? 'auto' : 'auto'});
+  document.getElementById('nav').classList.remove('open');
+}
+document.querySelectorAll('[data-page]').forEach(el=>{
+  el.addEventListener('click',e=>{
+    e.preventDefault();
+    showPage(el.dataset.page);
+  });
+});
+document.querySelector('.brand').style.cursor='pointer';
+document.querySelector('.brand').addEventListener('click',()=>showPage('beranda'));
+
+// ---------- nav toggle (mobile) ----------
+document.getElementById('navToggle').addEventListener('click',()=>{
+  document.getElementById('nav').classList.toggle('open');
+});
+
+// ---------- upload / dropzone ----------
+const dropzone=document.getElementById('dropzone');
+const fileInput=document.getElementById('fileInput');
+const fileListEl=document.getElementById('fileList');
+let files=[];
+
+function renderFiles(){
+  fileListEl.innerHTML='';
+  files.forEach((f,i)=>{
+    const li=document.createElement('li');
+    li.innerHTML=`<span>${f.name} <span style="color:#9FBDB7;">(${Math.max(1,Math.round(f.size/1024))} KB)</span></span>`;
+    const btn=document.createElement('button');
+    btn.textContent='Hapus';
+    btn.addEventListener('click',()=>{files.splice(i,1);renderFiles();});
+    li.appendChild(btn);
+    fileListEl.appendChild(li);
+  });
+}
+fileInput.addEventListener('change',e=>{
+  files = files.concat(Array.from(e.target.files));
+  renderFiles();
+});
+['dragenter','dragover'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.add('drag');}));
+['dragleave','drop'].forEach(evt=>dropzone.addEventListener(evt,e=>{e.preventDefault();dropzone.classList.remove('drag');}));
+dropzone.addEventListener('drop',e=>{
+  files = files.concat(Array.from(e.dataTransfer.files));
+  renderFiles();
+});
+
+document.getElementById('submitUpload').addEventListener('click', async ()=>{
+  const nama=document.getElementById('namaPemohon').value.trim();
+  const nik=document.getElementById('nikPemohon').value.trim();
+  const tempatLahir=document.getElementById('tempatLahir').value.trim();
+  const tglLahir=document.getElementById('tglLahir').value;
+  const jk=document.getElementById('jenisKelamin').value;
+  const agama=document.getElementById('agamaPemohon').value;
+  const statusKawin=document.getElementById('statusPemohon').value;
+  const alamat=document.getElementById('alamatPemohon').value.trim();
+  const msg=document.getElementById('ticketMsg');
+  if(!currentUser){
+    msg.textContent='Silakan Login atau Sign Up terlebih dahulu sebelum mengajukan surat.';
+    msg.classList.add('show');
+    openAuth('login');
+    return;
+  }
+  if(!nama || !nik || !alamat || files.length===0){
+    msg.textContent='Lengkapi minimal Nama, NIK, Alamat, dan unggah berkas terlebih dahulu.';
+    msg.classList.add('show');
+    return;
+  }
+  msg.textContent='Mengirim permohonan...';
+  msg.classList.add('show');
+  try{
+    const uploadedPaths=[];
+    for(const f of files){
+      const path = `${currentUser.id}/${Date.now()}-${f.name}`;
+      const {error:upErr} = await sb.storage.from('berkas-persyaratan').upload(path, f);
+      if(upErr) throw upErr;
+      uploadedPaths.push(path);
+    }
+    const ttl = tempatLahir && tglLahir
+      ? `${tempatLahir}, ${new Date(tglLahir).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}`
+      : '-';
+    const {data,error} = await sb.from('pengajuan').insert({
+      warga_id: currentUser.id,
+      jenis_surat_id: jenisSelect.value,
+      data: {
+        nama, nik, ttl, jk, agama,
+        status_nikah: statusKawin,
+        alamat, berkas: uploadedPaths
+      }
+    }).select().single();
+    if(error) throw error;
+    msg.innerHTML = `Permohonan diterima. Simpan kode tiket <span class="mono">${data.nomor_tiket}</span> untuk memantau status verifikasi dan tanda tangan digital.`;
+    files=[]; renderFiles();
+    ['namaPemohon','nikPemohon','tempatLahir','tglLahir','alamatPemohon'].forEach(id=>document.getElementById(id).value='');
+  } catch(err){
+    msg.textContent = 'Gagal mengirim permohonan: '+(err.message || 'terjadi kesalahan.');
+  }
+});
+
+// ---------- aspirasi feed (Supabase) ----------
+const feed=document.getElementById('feed');
+async function loadAspirasi(){
+  const {data,error} = await sb.from('aspirasi').select('*').order('created_at',{ascending:false}).limit(20);
+  feed.innerHTML='';
+  if(error || !data || data.length===0){
+    feed.innerHTML='<p class="feed-empty">Belum ada aspirasi masuk hari ini.</p>';
+    return;
+  }
+  data.forEach(a=>{
+    const time=new Date(a.created_at).toLocaleString('id-ID',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'});
+    const item=document.createElement('div');
+    item.className='feed-item';
+    item.innerHTML=`<div class="meta"><span>${a.nama_tampilan}</span>·<span>${a.kategori}</span>·<span>${time}</span></div>${a.isi}`;
+    feed.appendChild(item);
+  });
+}
+document.getElementById('kirimAspirasi').addEventListener('click', async ()=>{
+  const isi=document.getElementById('aspIsi').value.trim();
+  if(!isi) return;
+  const nama=document.getElementById('aspNama').value.trim() || 'Warga (anonim)';
+  const kategori=document.getElementById('aspKategori').value;
+  const {error} = await sb.from('aspirasi').insert({
+    warga_id: currentUser ? currentUser.id : null,
+    nama_tampilan: nama, kategori, isi
+  });
+  if(!error){
+    document.getElementById('aspIsi').value='';
+    document.getElementById('aspNama').value='';
+    loadAspirasi();
+  } else {
+    alert('Gagal mengirim aspirasi: '+error.message);
+  }
+});
+loadAspirasi();
+
+// ================= Admin TTE Dashboard (Supabase) =================
+const jenisPurpose = {
+  nikah:'Adalah benar warga Kelurahan Watang Soreang dan bermaksud untuk melangsungkan pernikahan. Surat keterangan ini diberikan untuk keperluan administrasi di KUA Kecamatan Soreang.',
+  tidakmampu:'Adalah benar warga Kelurahan Watang Soreang yang termasuk dalam kategori keluarga kurang mampu. Surat keterangan ini diberikan untuk keperluan pengajuan bantuan sosial dan keringanan biaya kesehatan/pendidikan.',
+  domisili:'Adalah benar warga yang berdomisili/bertempat tinggal di wilayah Kelurahan Watang Soreang sebagaimana alamat tersebut di atas.',
+  penghasilan:'Adalah benar orang tua/wali dari peserta didik dengan penghasilan sebagaimana tercantum di atas. Surat keterangan ini diberikan untuk keperluan pengajuan beasiswa/keringanan biaya pendidikan.',
+  pdam:'Adalah benar warga yang menggunakan/berlangganan air PDAM pada alamat tersebut di atas untuk keperluan administrasi sambungan air bersih.'
+};
+
+let queue = [];
+let riwayat = [];
+let bulanSelesai = 0;
+let selectedQueueId = null;
+
+async function fetchQueue(){
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .eq('status','siap_ttd')
+    .order('created_at',{ascending:true});
+  if(error){ console.error(error); queue=[]; return; }
+  queue = (data||[]).map(row=>({
+    id: row.id,
+    jenis_id: row.jenis_surat_id,
+    nama: row.data?.nama || '(tanpa nama)',
+    jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    masuk: new Date(row.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    status: 'siap',
+    nik: row.data?.nik || '-',
+    ttl: row.data?.ttl || '-',
+    jk: row.data?.jk || '-',
+    agama: row.data?.agama || '-',
+    sk: row.data?.status_nikah || '-',
+    alamat: row.data?.alamat || '-'
+  }));
+  if(!queue.find(q=>q.id===selectedQueueId)) selectedQueueId = queue.length ? queue[0].id : null;
+}
+
+async function fetchRiwayat(){
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .in('status',['ttd_selesai','dikembalikan'])
+    .order('updated_at',{ascending:false})
+    .limit(15);
+  if(error){ console.error(error); riwayat=[]; return; }
+  riwayat = (data||[]).map((row,i)=>({
+    no: i+1,
+    nama: row.data?.nama || '(tanpa nama)',
+    jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    waktu: new Date(row.updated_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    status: row.status==='ttd_selesai' ? 'selesai' : 'dikembalikan',
+    notif: row.status==='ttd_selesai' ? 'Terkirim' : (row.catatan_staf || 'Menunggu perbaikan berkas')
+  }));
+}
+
+async function fetchBulanSelesai(){
+  const startOfMonth = new Date(); startOfMonth.setDate(1); startOfMonth.setHours(0,0,0,0);
+  const {count,error} = await sb.from('pengajuan')
+    .select('*',{count:'exact',head:true})
+    .eq('status','ttd_selesai')
+    .gte('ditandatangani_at', startOfMonth.toISOString());
+  bulanSelesai = error ? 0 : (count||0);
+}
+
+function fmtStatusPill(s){
+  const map={siap:['siap','Siap TTE'], menunggu:['menunggu','Menunggu'], selesai:['selesai','✓ TTE Selesai'], dikembalikan:['dikembalikan','✕ Dikembalikan']};
+  const m=map[s]||['menunggu',s];
+  return `<span class="status-pill ${m[0]}">${m[1]}</span>`;
+}
+
+async function renderAdminAll(){
+  await Promise.all([fetchQueue(), fetchRiwayat(), fetchBulanSelesai()]);
+  renderQueue(); renderPreviewPanel(); renderRiwayatHariIni(); renderRiwayatFull(); renderStats();
+}
+
+function renderStats(){
+  document.getElementById('statMenunggu').textContent = queue.length;
+  document.getElementById('statMenunggu2').textContent = queue.length;
+  document.getElementById('statSelesai').textContent = bulanSelesai;
+  document.getElementById('adminQueueBadge').textContent = queue.length;
+  document.getElementById('menuCountAntrian').textContent = queue.length;
+  document.getElementById('queueCountChip').textContent = queue.length + ' Dokumen';
+}
+
+function renderQueue(){
+  const list=document.getElementById('queueList');
+  list.innerHTML='';
+  if(queue.length===0){
+    list.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#7A8AA0;">Semua dokumen telah diproses. 🎉</div>';
+  }
+  queue.forEach((q,i)=>{
+    const row=document.createElement('div');
+    row.className='queue-item'+(q.id===selectedQueueId?' selected':'');
+    row.innerHTML=`
+      <div class="queue-num">${i+1}</div>
+      <div class="qi-body">
+        <div class="qi-top">
+          <div>
+            <div class="qi-name">${q.nama}</div>
+            <div class="qi-jenis">${q.jenis}</div>
+          </div>
+          ${fmtStatusPill(q.status)}
+        </div>
+        <div class="qi-meta">🕒 Masuk: ${q.masuk} — Berkas: 4/4 ✅</div>
+      </div>`;
+    row.addEventListener('click',()=>{selectedQueueId=q.id; renderQueue(); renderPreviewPanel();});
+    list.appendChild(row);
+  });
+}
+
+function docNumber(id){
+  const short = String(id).replace(/-/g,'').slice(0,3).toUpperCase();
+  return `474.2/${short}/KEL-WS/VI/2026`;
+}
+
+function renderPreviewPanel(){
+  const item = queue.find(q=>q.id===selectedQueueId);
+  const previewName=document.getElementById('previewName');
+  const signPanelName=document.getElementById('signPanelName');
+  const spNama=document.getElementById('spNama');
+  const spJenis=document.getElementById('spJenis');
+  const docPreview=document.getElementById('docPreview');
+  const btnSignNow=document.getElementById('btnSignNow');
+
+  if(!item){
+    previewName.textContent='—';
+    signPanelName.textContent='—';
+    spNama.textContent='—'; spJenis.textContent='—';
+    docPreview.innerHTML='<p style="color:#7A8AA0;">Tidak ada dokumen dalam antrian.</p>';
+    btnSignNow.disabled=true;
+    return;
+  }
+  btnSignNow.disabled=false;
+  previewName.textContent=item.nama;
+  signPanelName.textContent=item.nama+' / '+item.jenis;
+  spNama.textContent=item.nama;
+  spJenis.textContent=item.jenis;
+
+  docPreview.innerHTML=`
+    <div class="letterhead">
+      <svg viewBox="0 0 46 46" fill="none"><path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/></svg>
+      <div>
+        <b>PEMERINTAH KOTA PAREPARE</b>
+        <b>KECAMATAN SOREANG</b>
+        <b>KELURAHAN WATANG SOREANG</b>
+        <div style="font-size:10px;color:#7A8AA0;">Jl. Watang Soreang No.1, Kec. Soreang, Kota Parepare, Sulawesi Selatan 91131<br>Telp. (0421) XXXXXX • Email: watangsoreang@parepare.go.id</div>
+      </div>
+    </div>
+    <div class="doc-title">${item.jenis.toUpperCase()}</div>
+    <div class="doc-num">Nomor: ${docNumber(item.id)}</div>
+    <p>Yang bertanda tangan di bawah ini, Lurah Watang Soreang Kecamatan Soreang Kota Parepare, dengan ini menerangkan bahwa:</p>
+    <div class="doc-field"><span>Nama Lengkap</span><span>:</span><b>${item.nama.toUpperCase()}</b></div>
+    <div class="doc-field"><span>NIK</span><span>:</span><span>${item.nik}</span></div>
+    <div class="doc-field"><span>Tempat / Tgl. Lahir</span><span>:</span><span>${item.ttl}</span></div>
+    <div class="doc-field"><span>Jenis Kelamin</span><span>:</span><span>${item.jk}</span></div>
+    <div class="doc-field"><span>Agama</span><span>:</span><span>${item.agama}</span></div>
+    <div class="doc-field"><span>Status</span><span>:</span><span>${item.sk}</span></div>
+    <div class="doc-field"><span>Alamat</span><span>:</span><span>${item.alamat}</span></div>
+    <p style="margin-top:12px;">${jenisPurpose[item.jenis_id] || 'Surat keterangan ini diberikan untuk keperluan administrasi sebagaimana mestinya.'}</p>
+    <p style="margin-top:10px;">Parepare, 26 Juni 2026<br><b>Lurah Watang Soreang,</b></p>
+    <div class="sign-box">
+      <div class="st">✅ TANDA TANGAN ELEKTRONIK</div>
+      <div class="who">H. IRWAN, S.Sos</div>
+      <div class="meta">NIP: 19XXXXXXXXXXXX</div>
+      <div class="meta">Hash: A3F6-92BC-TTE-SPBE-2026</div>
+      <div class="meta">🔒 Terverifikasi SPBE Kota Parepare</div>
+    </div>`;
+}
+
+function renderRiwayatHariIni(){
+  const body=document.getElementById('riwayatBody');
+  if(!body) return;
+  body.innerHTML='';
+  riwayat.slice(0,8).forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${String(r.no).padStart(2,'0')}</td><td><b>${r.nama}</b></td><td>${r.jenis}</td><td>${r.waktu}</td><td>${fmtStatusPill(r.status)}</td><td>${r.status==='selesai'?'📩 '+r.notif:'⚠️ '+r.notif}</td>`;
+    body.appendChild(tr);
+  });
+}
+function renderRiwayatFull(){
+  const body=document.getElementById('riwayatBodyFull');
+  if(!body) return;
+  body.innerHTML='';
+  riwayat.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${String(r.no).padStart(2,'0')}</td><td><b>${r.nama}</b></td><td>${r.jenis}</td><td>${r.waktu}</td><td>${fmtStatusPill(r.status)}</td><td>${r.status==='selesai'?'📩 '+r.notif:'⚠️ '+r.notif}</td>`;
+    body.appendChild(tr);
+  });
+}
+
+function showToast(msg, isHtml){
+  const t=document.getElementById('signToast');
+  if(isHtml) t.innerHTML=msg; else t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),4500);
+}
+
+document.getElementById('btnSignNow').addEventListener('click', async ()=>{
+  const item = queue.find(q=>q.id===selectedQueueId);
+  if(!item || !currentUser) return;
+  const {error} = await sb.from('pengajuan').update({
+    status:'ttd_selesai', ditandatangani_oleh: currentUser.id
+  }).eq('id', item.id);
+  if(error){ showToast('Gagal menandatangani: '+error.message); return; }
+  const {data:sig} = await sb.storage.from('ttd-resmi').createSignedUrl(`${currentUser.id}/tanda-tangan.png`, 120);
+  const sigThumb = sig ? `<img src="${sig.signedUrl}" alt="Tanda tangan" style="height:32px;vertical-align:middle;margin-right:8px;filter:brightness(0) invert(1);">` : '';
+  showToast(`${sigThumb}✅ TTE berhasil! ${item.jenis} a.n. ${item.nama} telah terbit dan notifikasi WhatsApp telah dikirim ke pemohon.`, true);
+  await renderAdminAll();
+});
+
+document.getElementById('btnSkip').addEventListener('click',()=>{
+  if(queue.length<2) return;
+  const idx = queue.findIndex(q=>q.id===selectedQueueId);
+  const next = queue[(idx+1)%queue.length];
+  selectedQueueId = next.id;
+  renderQueue(); renderPreviewPanel();
+});
+
+document.getElementById('btnReturn').addEventListener('click', async ()=>{
+  const item = queue.find(q=>q.id===selectedQueueId);
+  if(!item || !currentUser) return;
+  const catatan = prompt('Catatan untuk staf pelayanan (opsional):','Data tidak sesuai') || 'Data tidak sesuai';
+  const {error} = await sb.from('pengajuan').update({
+    status:'dikembalikan', catatan_staf: catatan
+  }).eq('id', item.id);
+  if(error){ showToast('Gagal mengembalikan: '+error.message); return; }
+  showToast(`↩️ Dokumen ${item.jenis} a.n. ${item.nama} dikembalikan ke Staf Pelayanan untuk perbaikan berkas.`);
+  await renderAdminAll();
+});
+
+// ---------- sidebar view switching (Lurah) ----------
+document.querySelectorAll('.admin-menu-item[data-admin]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.admin-menu-item[data-admin]').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.admin-view').forEach(v=>v.style.display='none');
+    document.getElementById('adminView-'+el.dataset.admin).style.display='block';
+    if(el.dataset.admin==='pengaturan') loadSignaturePreview();
+  });
+});
+
+// ---------- tanda tangan elektronik privat (hanya Lurah yang login) ----------
+async function loadSignaturePreview(){
+  const wrap=document.getElementById('sigPreviewWrap');
+  if(!currentUser){ wrap.innerHTML=''; return; }
+  const {data,error} = await sb.storage.from('ttd-resmi').createSignedUrl(`${currentUser.id}/tanda-tangan.png`, 300);
+  if(error || !data){
+    wrap.innerHTML='<p style="font-size:12.5px;color:#7A8AA0;">Belum ada tanda tangan tersimpan untuk akun ini.</p>';
+    return;
+  }
+  wrap.innerHTML = `<img src="${data.signedUrl}" alt="Tanda tangan tersimpan" style="max-width:260px;display:block;border:1px solid var(--line);border-radius:8px;padding:10px;background:#fff;">`;
+}
+document.getElementById('sigFile').addEventListener('change',()=>{
+  const f=document.getElementById('sigFile').files[0];
+  document.getElementById('sigFileLabel').value = f ? f.name : '';
+});
+document.getElementById('btnSaveSignature').addEventListener('click', async ()=>{
+  const msg=document.getElementById('sigMsg');
+  const file=document.getElementById('sigFile').files[0];
+  msg.style.display='none';
+  if(!currentUser || currentProfile?.role!=='lurah') return;
+  if(!file){
+    msg.style.display='block'; msg.style.background='#FFF3F4'; msg.style.color='#B4232C';
+    msg.textContent='Pilih file gambar tanda tangan terlebih dahulu.';
+    return;
+  }
+  try{
+    const path = `${currentUser.id}/tanda-tangan.png`;
+    const {error} = await sb.storage.from('ttd-resmi').upload(path, file, {upsert:true});
+    if(error) throw error;
+    msg.style.display='block'; msg.style.background='#E7F6EC'; msg.style.color='#1A5C36';
+    msg.textContent='Tanda tangan berhasil disimpan secara privat untuk akun ini.';
+    document.getElementById('sigFile').value='';
+    document.getElementById('sigFileLabel').value='';
+    loadSignaturePreview();
+  } catch(err){
+    msg.style.display='block'; msg.style.background='#FFF3F4'; msg.style.color='#B4232C';
+    msg.textContent='Gagal menyimpan: '+(err.message||'terjadi kesalahan.');
+  }
+});
+
+// ================= Staf Verifikasi Dashboard (Supabase) =================
+let stafQueue = [];
+let stafRiwayat = [];
+let stafVerifToday = 0;
+let stafKembaliToday = 0;
+let selectedStafId = null;
+
+async function fetchStafQueue(){
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .eq('status','diajukan')
+    .order('created_at',{ascending:true});
+  if(error){ console.error(error); stafQueue=[]; return; }
+  stafQueue = (data||[]).map(row=>({
+    id: row.id,
+    jenis_id: row.jenis_surat_id,
+    nama: row.data?.nama || '(tanpa nama)',
+    jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    masuk: new Date(row.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    berkas: Array.isArray(row.data?.berkas) ? row.data.berkas.length : 0,
+    nik: row.data?.nik || '-', ttl: row.data?.ttl || '-', jk: row.data?.jk || '-',
+    agama: row.data?.agama || '-', sk: row.data?.status_nikah || '-', alamat: row.data?.alamat || '-'
+  }));
+  if(!stafQueue.find(q=>q.id===selectedStafId)) selectedStafId = stafQueue.length ? stafQueue[0].id : null;
+}
+
+async function fetchStafRiwayat(){
+  const startOfDay = new Date(); startOfDay.setHours(0,0,0,0);
+  const {data,error} = await sb.from('pengajuan')
+    .select('*, jenis_surat(nama)')
+    .in('status',['siap_ttd','ttd_selesai','dikembalikan'])
+    .gte('updated_at', startOfDay.toISOString())
+    .order('updated_at',{ascending:false})
+    .limit(20);
+  if(error){ console.error(error); stafRiwayat=[]; return; }
+  stafRiwayat = (data||[]).map((row,i)=>({
+    no:i+1, nama: row.data?.nama || '(tanpa nama)', jenis: row.jenis_surat?.nama || row.jenis_surat_id,
+    waktu: new Date(row.updated_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
+    status: row.status==='dikembalikan' ? 'dikembalikan' : 'selesai'
+  }));
+  stafVerifToday = stafRiwayat.filter(r=>r.status==='selesai').length;
+  stafKembaliToday = stafRiwayat.filter(r=>r.status==='dikembalikan').length;
+}
+
+function stafDocNumber(id){
+  return `474.2/${String(id).replace(/-/g,'').slice(0,3).toUpperCase()}/KEL-WS/VI/2026`;
+}
+
+async function renderStafAll(){
+  await Promise.all([fetchStafQueue(), fetchStafRiwayat()]);
+  renderStafQueue(); renderStafPreview(); renderStafRiwayatTables(); renderStafStats();
+}
+
+function renderStafStats(){
+  document.getElementById('stafStatMenunggu').textContent = stafQueue.length;
+  document.getElementById('stafStatMenunggu2').textContent = stafQueue.length;
+  document.getElementById('stafStatVerifikasi').textContent = stafVerifToday;
+  document.getElementById('stafStatKembali').textContent = stafKembaliToday;
+  document.getElementById('stafQueueBadge').textContent = stafQueue.length;
+  document.getElementById('menuCountVerifikasi').textContent = stafQueue.length;
+  document.getElementById('stafQueueCountChip').textContent = stafQueue.length + ' Dokumen';
+}
+
+function renderStafQueue(){
+  const list=document.getElementById('stafQueueList');
+  list.innerHTML='';
+  if(stafQueue.length===0){
+    list.innerHTML='<div style="padding:24px;text-align:center;font-size:13px;color:#7A8AA0;">Tidak ada permohonan baru menunggu verifikasi. 🎉</div>';
+    return;
+  }
+  stafQueue.forEach((q,i)=>{
+    const row=document.createElement('div');
+    row.className='queue-item'+(q.id===selectedStafId?' selected':'');
+    row.innerHTML=`
+      <div class="queue-num">${i+1}</div>
+      <div class="qi-body">
+        <div class="qi-top">
+          <div>
+            <div class="qi-name">${q.nama}</div>
+            <div class="qi-jenis">${q.jenis}</div>
+          </div>
+          <span class="status-pill menunggu">Baru Masuk</span>
+        </div>
+        <div class="qi-meta">🕒 Masuk: ${q.masuk} — Berkas: ${q.berkas} file</div>
+      </div>`;
+    row.addEventListener('click',()=>{selectedStafId=q.id; renderStafQueue(); renderStafPreview();});
+    list.appendChild(row);
+  });
+}
+
+function renderStafPreview(){
+  const item = stafQueue.find(q=>q.id===selectedStafId);
+  const previewName=document.getElementById('stafPreviewName');
+  const panelName=document.getElementById('stafPanelName');
+  const spNama=document.getElementById('stafSpNama');
+  const spJenis=document.getElementById('stafSpJenis');
+  const spBerkas=document.getElementById('stafSpBerkas');
+  const docPreview=document.getElementById('stafDocPreview');
+  const btnVerifikasi=document.getElementById('btnVerifikasi');
+  const btnKembalikan=document.getElementById('btnKembalikanWarga');
+
+  if(!item){
+    previewName.textContent='—'; panelName.textContent='—';
+    spNama.textContent='—'; spJenis.textContent='—'; spBerkas.textContent='—';
+    docPreview.innerHTML='<p style="color:#7A8AA0;">Tidak ada permohonan dalam antrian.</p>';
+    btnVerifikasi.disabled=true; btnKembalikan.disabled=true;
+    return;
+  }
+  btnVerifikasi.disabled=false; btnKembalikan.disabled=false;
+  previewName.textContent=item.nama;
+  panelName.textContent=item.nama+' / '+item.jenis;
+  spNama.textContent=item.nama;
+  spJenis.textContent=item.jenis;
+  spBerkas.textContent=item.berkas+' file diunggah';
+
+  docPreview.innerHTML=`
+    <div class="letterhead">
+      <svg viewBox="0 0 46 46" fill="none"><path d="M23 3 L41 10 V22 C41 33 33 40 23 43 C13 40 5 33 5 22 V10 Z" fill="#0B2A55" stroke="#D4A017" stroke-width="1.6"/></svg>
+      <div>
+        <b>PEMERINTAH KOTA PAREPARE</b>
+        <b>KECAMATAN SOREANG</b>
+        <b>KELURAHAN WATANG SOREANG</b>
+        <div style="font-size:10px;color:#7A8AA0;">Jl. Watang Soreang No.1, Kec. Soreang, Kota Parepare, Sulawesi Selatan 91131<br>Telp. (0421) XXXXXX • Email: watangsoreang@parepare.go.id</div>
+      </div>
+    </div>
+    <div class="doc-title">${item.jenis.toUpperCase()} (DRAF)</div>
+    <div class="doc-num">Nomor sementara: ${stafDocNumber(item.id)}</div>
+    <div class="doc-field"><span>Nama Lengkap</span><span>:</span><b>${item.nama.toUpperCase()}</b></div>
+    <div class="doc-field"><span>NIK</span><span>:</span><span>${item.nik}</span></div>
+    <div class="doc-field"><span>Tempat / Tgl. Lahir</span><span>:</span><span>${item.ttl}</span></div>
+    <div class="doc-field"><span>Jenis Kelamin</span><span>:</span><span>${item.jk}</span></div>
+    <div class="doc-field"><span>Agama</span><span>:</span><span>${item.agama}</span></div>
+    <div class="doc-field"><span>Status</span><span>:</span><span>${item.sk}</span></div>
+    <div class="doc-field"><span>Alamat</span><span>:</span><span>${item.alamat}</span></div>
+    <p style="margin-top:12px;color:#7A8AA0;">Dokumen ini masih berupa draf menunggu verifikasi kelengkapan berkas oleh Staf Pelayanan.</p>`;
+}
+
+function renderStafRiwayatTables(){
+  const short = document.getElementById('stafRiwayatBody');
+  const full = document.getElementById('stafRiwayatBodyFull');
+  const rowHtml = r => `<td>${String(r.no).padStart(2,'0')}</td><td><b>${r.nama}</b></td><td>${r.jenis}</td><td>${r.waktu}</td><td>${r.status==='selesai'?'<span class="status-pill selesai">✓ Diteruskan ke Lurah</span>':'<span class="status-pill dikembalikan">✕ Dikembalikan</span>'}</td>`;
+  if(short){ short.innerHTML=''; stafRiwayat.slice(0,8).forEach(r=>{const tr=document.createElement('tr'); tr.innerHTML=rowHtml(r); short.appendChild(tr);}); }
+  if(full){ full.innerHTML=''; stafRiwayat.forEach(r=>{const tr=document.createElement('tr'); tr.innerHTML=rowHtml(r); full.appendChild(tr);}); }
+}
+
+function showStafToast(msg){
+  const t=document.getElementById('stafToast');
+  t.textContent=msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>t.classList.remove('show'),3800);
+}
+
+document.getElementById('btnVerifikasi').addEventListener('click', async ()=>{
+  const item = stafQueue.find(q=>q.id===selectedStafId);
+  if(!item || !currentUser) return;
+  const {error} = await sb.from('pengajuan').update({
+    status:'siap_ttd', diverifikasi_oleh: currentUser.id, diverifikasi_at: new Date().toISOString()
+  }).eq('id', item.id);
+  if(error){ showStafToast('Gagal memverifikasi: '+error.message); return; }
+  showStafToast(`✅ Berkas ${item.jenis} a.n. ${item.nama} lengkap dan diteruskan ke antrian TTE Kepala Lurah.`);
+  await renderStafAll();
+});
+
+document.getElementById('btnKembalikanWarga').addEventListener('click', async ()=>{
+  const item = stafQueue.find(q=>q.id===selectedStafId);
+  if(!item || !currentUser) return;
+  const catatan = prompt('Alasan pengembalian ke warga (mis. berkas kurang jelas):','Berkas kurang jelas/tidak sesuai') || 'Berkas kurang jelas/tidak sesuai';
+  const {error} = await sb.from('pengajuan').update({
+    status:'dikembalikan', catatan_staf: catatan
+  }).eq('id', item.id);
+  if(error){ showStafToast('Gagal mengembalikan: '+error.message); return; }
+  showStafToast(`↩️ Permohonan ${item.jenis} a.n. ${item.nama} dikembalikan ke warga untuk perbaikan berkas.`);
+  await renderStafAll();
+});
+
+// ---------- sidebar view switching (Staf) ----------
+document.querySelectorAll('.admin-menu-item[data-staf]').forEach(el=>{
+  el.addEventListener('click',()=>{
+    document.querySelectorAll('.admin-menu-item[data-staf]').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    document.querySelectorAll('.staf-view').forEach(v=>v.style.display='none');
+    document.getElementById('stafView-'+el.dataset.staf).style.display='block';
+  });
+});
+
+// ---------- enter / exit staf dashboard ----------
+function enterStaf(){
+  if(!currentUser || !currentProfile || currentProfile.role!=='staf' || !currentProfile.aktif){
+    alert(currentProfile && currentProfile.role==='staf' && !currentProfile.aktif
+      ? 'Akses akun Staf ini sedang dinonaktifkan. Hubungi admin sistem.'
+      : 'Halaman ini khusus untuk akun Staf Pelayanan. Silakan login dengan akun Staf terlebih dahulu.');
+    if(!currentUser) openAuth('login');
+    return;
+  }
+  document.getElementById('stafNamaTop').textContent = currentProfile.nama_lengkap || currentUser.email;
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('staf').classList.add('active');
+  document.querySelector('header').style.display='none';
+  window.scrollTo(0,0);
+  renderStafAll();
+}
+function exitStaf(){
+  document.querySelector('header').style.display='';
+  showPage('beranda');
+}
+document.getElementById('navStaf').addEventListener('click',e=>{
+  e.preventDefault();
+  document.getElementById('nav').classList.remove('open');
+  enterStaf();
+});
+document.getElementById('btnKeluarStaf').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  await refreshAuthState();
+  exitStaf();
+});
+document.getElementById('btnKembaliBerandaStaf').addEventListener('click',exitStaf);
+
+// ---------- enter / exit admin dashboard ----------
+function enterAdmin(){
+  if(!currentUser || !currentProfile || currentProfile.role!=='lurah' || !currentProfile.aktif){
+    alert(currentProfile && currentProfile.role==='lurah' && !currentProfile.aktif
+      ? 'Akses akun Kepala Lurah ini sedang dinonaktifkan. Hubungi admin sistem.'
+      : 'Halaman ini khusus untuk akun Kepala Lurah. Silakan login dengan akun Lurah terlebih dahulu.');
+    if(!currentUser) openAuth('login');
+    return;
+  }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('admin').classList.add('active');
+  document.querySelector('header').style.display='none';
+  window.scrollTo(0,0);
+  renderAdminAll();
+}
+function exitAdmin(){
+  document.querySelector('header').style.display='';
+  showPage('beranda');
+}
+document.getElementById('navTTE').addEventListener('click',e=>{
+  e.preventDefault();
+  document.getElementById('nav').classList.remove('open');
+  enterAdmin();
+});
+document.getElementById('btnKeluarAdmin').addEventListener('click', async ()=>{
+  await sb.auth.signOut();
+  await refreshAuthState();
+  exitAdmin();
+});
+document.getElementById('btnKembaliBeranda').addEventListener('click',exitAdmin);
+</script>
+</body>
+</html>
