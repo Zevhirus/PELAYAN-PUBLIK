@@ -473,7 +473,7 @@
       <a href="#" data-page="unggah" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Isi Form Mandiri</a>
     </div>
     <div class="feature-card">
-      <div class="flabel">📣 3. Kotak Pengaduan "Wiku"</div>
+      <div class="flabel">📣 3. Kotak Pengaduan</div>
       <p>Media aspirasi, kritik, dan laporan pengawasan masyarakat demi peningkatan responsivitas dan perwujudan tata kelola Good Governance.</p>
       <a href="#" data-page="aspirasi" class="btn btn-dark" style="font-size:13px;padding:10px 18px;">Kirim Aspirasi</a>
     </div>
@@ -556,6 +556,10 @@
         </div>
       </div>
       <div>
+        <div id="editNotice" style="display:none;background:#FFF6E5;border:1px solid #E3A13B;border-radius:10px;padding:12px 14px;margin-bottom:16px;font-size:13px;color:#5A3E12;">
+          <b>🔧 Mode Perbaikan:</b> <span id="editNoticeText"></span>
+          <button type="button" id="btnBatalEdit" style="display:block;margin-top:8px;background:none;border:none;color:#B4232C;text-decoration:underline;font-size:12.5px;cursor:pointer;padding:0;">Batalkan &amp; buat permohonan baru</button>
+        </div>
         <div class="field">
           <label for="jenisSurat">Jenis Surat</label>
           <select id="jenisSurat"></select>
@@ -606,6 +610,7 @@
         </div>
         <div class="field">
           <label>Berkas (KTP, KK, Surat Pengantar RT)</label>
+          <ul class="filelist" id="existingFileList" style="display:none;"></ul>
           <div class="dropzone" id="dropzone">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E3A13B" stroke-width="1.7" style="margin:0 auto;"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 002 2h12a2 2 0 002-2v-3"/></svg>
             <p>Seret berkas ke sini, atau <label for="fileInput" style="color:#E3A13B;text-decoration:underline;cursor:pointer;">pilih file</label></p>
@@ -931,6 +936,14 @@
             <div class="sp-box"><div class="l">Jenis Surat</div><div class="v" id="stafSpJenis">—</div></div>
             <div class="sp-box"><div class="l">Jumlah Berkas</div><div class="v" id="stafSpBerkas">—</div></div>
           </div>
+          <div class="field" style="margin:14px 0 4px;">
+            <label style="font-size:12.5px;font-weight:700;">📎 Berkas Diunggah Warga — cek kesesuaian dengan data di atas</label>
+            <div id="stafBerkasList" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;"></div>
+          </div>
+          <div class="field" style="margin:14px 0;">
+            <label for="stafNomorSurat" style="font-size:12.5px;font-weight:700;">🔢 Nomor Surat (diisi sebelum diteruskan ke Lurah)</label>
+            <input type="text" id="stafNomorSurat" placeholder="mis. 474.2/123/KEL-WS/VII/2026" style="width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:13.5px;">
+          </div>
           <div class="alur-box">
             <div class="title">🗂️ Alur Verifikasi Berkas — Integrasi SPBE</div>
             <div class="sub">Staf memeriksa kesesuaian data dan kelengkapan berkas. Setelah dinyatakan lengkap, permohonan otomatis diteruskan ke antrian tanda tangan elektronik Kepala Lurah.</div>
@@ -1204,6 +1217,59 @@ const dropzone=document.getElementById('dropzone');
 const fileInput=document.getElementById('fileInput');
 const fileListEl=document.getElementById('fileList');
 let files=[];
+let editingPengajuanId = null;
+let editingExistingBerkas = [];
+
+function resetUploadForm(){
+  editingPengajuanId = null;
+  editingExistingBerkas = [];
+  files = []; renderFiles();
+  document.getElementById('editNotice').style.display='none';
+  document.getElementById('existingFileList').style.display='none';
+  document.getElementById('existingFileList').innerHTML='';
+  document.getElementById('submitUpload').textContent='Kirim Permohonan';
+  ['namaPemohon','nikPemohon','tempatLahir','tglLahir','alamatPemohon'].forEach(id=>document.getElementById(id).value='');
+}
+
+function startPerbaiki(row){
+  const d = row.data || {};
+  editingPengajuanId = row.id;
+  editingExistingBerkas = Array.isArray(d.berkas) ? [...d.berkas] : [];
+  files = []; renderFiles();
+  jenisSelect.value = row.jenis_surat_id;
+  document.getElementById('namaPemohon').value = d.nama || '';
+  document.getElementById('nikPemohon').value = d.nik || '';
+  document.getElementById('jenisKelamin').value = d.jk || 'Laki-laki';
+  document.getElementById('agamaPemohon').value = d.agama || 'Islam';
+  document.getElementById('statusPemohon').value = d.status_nikah || 'Belum Kawin';
+  document.getElementById('alamatPemohon').value = d.alamat || '';
+  // ttl disimpan gabungan "Tempat, tanggal" -> pisahkan lagi ke field tempat lahir saja (tanggal dibiarkan kosong, boleh diisi ulang jika perlu)
+  const ttlParts = (d.ttl || '').split(',');
+  document.getElementById('tempatLahir').value = ttlParts[0]?.trim() || '';
+  document.getElementById('tglLahir').value = '';
+
+  const notice = document.getElementById('editNotice');
+  document.getElementById('editNoticeText').textContent = `Anda memperbaiki permohonan "${row.jenis_surat?.nama || row.jenis_surat_id}" yang dikembalikan. Alasan: ${row.catatan_staf || 'berkas kurang sesuai'}.`;
+  notice.style.display='block';
+
+  const exList = document.getElementById('existingFileList');
+  if(editingExistingBerkas.length){
+    exList.style.display='block';
+    exList.innerHTML='';
+    editingExistingBerkas.forEach(path=>{
+      const li=document.createElement('li');
+      li.innerHTML = `<span>📄 ${path.split('/').pop()} <span style="color:#9FBDB7;">(berkas lama, sudah tersimpan)</span></span>`;
+      exList.appendChild(li);
+    });
+  } else {
+    exList.style.display='none';
+  }
+  document.getElementById('submitUpload').textContent='Kirim Ulang Perbaikan';
+  showPage('unggah');
+  window.scrollTo({top:0,behavior:'auto'});
+}
+
+document.getElementById('btnBatalEdit').addEventListener('click', resetUploadForm);
 
 function renderFiles(){
   fileListEl.innerHTML='';
@@ -1244,12 +1310,12 @@ document.getElementById('submitUpload').addEventListener('click', async ()=>{
     openAuth('login');
     return;
   }
-  if(!nama || !nik || !alamat || files.length===0){
+  if(!nama || !nik || !alamat || (files.length===0 && editingExistingBerkas.length===0)){
     msg.textContent='Lengkapi minimal Nama, NIK, Alamat, dan unggah berkas terlebih dahulu.';
     msg.classList.add('show');
     return;
   }
-  msg.textContent='Mengirim permohonan...';
+  msg.textContent = editingPengajuanId ? 'Mengirim ulang perbaikan...' : 'Mengirim permohonan...';
   msg.classList.add('show');
   try{
     const uploadedPaths=[];
@@ -1261,21 +1327,35 @@ document.getElementById('submitUpload').addEventListener('click', async ()=>{
     }
     const ttl = tempatLahir && tglLahir
       ? `${tempatLahir}, ${new Date(tglLahir).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'})}`
-      : '-';
-    const {data,error} = await sb.from('pengajuan').insert({
-      warga_id: currentUser.id,
-      jenis_surat_id: jenisSelect.value,
-      status: 'siap_ttd',
-      data: {
-        nama, nik, ttl, jk, agama,
-        status_nikah: statusKawin,
-        alamat, berkas: uploadedPaths
-      }
-    }).select().single();
-    if(error) throw error;
-    msg.innerHTML = `Permohonan diterima. Simpan kode tiket <span class="mono">${data.nomor_tiket}</span> untuk memantau status verifikasi dan tanda tangan digital.`;
-    files=[]; renderFiles();
-    ['namaPemohon','nikPemohon','tempatLahir','tglLahir','alamatPemohon'].forEach(id=>document.getElementById(id).value='');
+      : (tempatLahir || '-');
+    const dataPayload = {
+      nama, nik, ttl, jk, agama,
+      status_nikah: statusKawin,
+      alamat, berkas: [...editingExistingBerkas, ...uploadedPaths]
+    };
+    if(editingPengajuanId){
+      const {error} = await sb.from('pengajuan').update({
+        jenis_surat_id: jenisSelect.value,
+        status: 'diajukan',
+        catatan_staf: null,
+        data: dataPayload
+      }).eq('id', editingPengajuanId);
+      if(error) throw error;
+      msg.innerHTML = 'Perbaikan berhasil dikirim ulang. Permohonan Anda kembali masuk ke antrian verifikasi Staf Pelayanan.';
+      resetUploadForm();
+      fetchWargaStatus();
+    } else {
+      const {data,error} = await sb.from('pengajuan').insert({
+        warga_id: currentUser.id,
+        jenis_surat_id: jenisSelect.value,
+        status: 'diajukan',
+        data: dataPayload
+      }).select().single();
+      if(error) throw error;
+      msg.innerHTML = `Permohonan diterima. Simpan kode tiket <span class="mono">${data.nomor_tiket}</span> untuk memantau status verifikasi dan tanda tangan digital.`;
+      files=[]; renderFiles();
+      ['namaPemohon','nikPemohon','tempatLahir','tglLahir','alamatPemohon'].forEach(id=>document.getElementById(id).value='');
+    }
   } catch(err){
     msg.textContent = 'Gagal mengirim permohonan: '+(err.message || 'terjadi kesalahan.');
   }
@@ -1349,7 +1429,8 @@ async function fetchQueue(){
     jk: row.data?.jk || '-',
     agama: row.data?.agama || '-',
     sk: row.data?.status_nikah || '-',
-    alamat: row.data?.alamat || '-'
+    alamat: row.data?.alamat || '-',
+    noSurat: row.data?.no_surat || ''
   }));
   if(!queue.find(q=>q.id===selectedQueueId)) selectedQueueId = queue.length ? queue[0].id : null;
 }
@@ -1460,7 +1541,7 @@ async function fetchWargaStatus(){
     const label = statusLabelMap[row.status] || row.status;
     let actionHtml = '—';
     if(row.status==='ttd_selesai') actionHtml = `<button class="btn-mini outline" data-download-id="${row.id}">⬇️ Unduh PDF</button>`;
-    else if(row.status==='dikembalikan') actionHtml = `<span style="font-size:12px;color:#B4232C;">${row.catatan_staf || 'Perlu perbaikan berkas'}</span>`;
+    else if(row.status==='dikembalikan') actionHtml = `<div style="font-size:12px;color:#B4232C;margin-bottom:6px;">${row.catatan_staf || 'Perlu perbaikan berkas'}</div><button class="btn-mini outline" data-perbaiki-id="${row.id}">🔧 Perbaiki &amp; Kirim Ulang</button>`;
     const tr=document.createElement('tr');
     tr.innerHTML = `<td>${row.jenis_surat?.nama || row.jenis_surat_id}</td><td>${tgl}</td><td>${label}</td><td>${actionHtml}</td>`;
     body.appendChild(tr);
@@ -1469,6 +1550,12 @@ async function fetchWargaStatus(){
     btn.addEventListener('click',()=>{
       const row = statusRows.find(r=>r.id===btn.dataset.downloadId);
       if(row) downloadSuratPDF(row);
+    });
+  });
+  body.querySelectorAll('[data-perbaiki-id]').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const row = statusRows.find(r=>r.id===btn.dataset.perbaikiId);
+      if(row) startPerbaiki(row);
     });
   });
 }
@@ -1488,7 +1575,7 @@ async function downloadSuratPDF(row){
       <div style="font-size:10.5px;color:#7A8AA0;margin-top:4px;">Jl. Watang Soreang No.1, Kec. Soreang, Kota Parepare, Sulawesi Selatan 91131<br>Telp. (0421) XXXXXX • Email: watangsoreang@parepare.go.id</div>
     </div>
     <div style="text-align:center;font-weight:700;font-size:16px;text-decoration:underline;margin-bottom:4px;">${jenisNama.toUpperCase()}</div>
-    <div style="text-align:center;font-size:12px;margin-bottom:20px;">Nomor: ${docNumber(row.id)}</div>
+    <div style="text-align:center;font-size:12px;margin-bottom:20px;">Nomor: ${d.no_surat || docNumber(row.id)}</div>
     <p style="font-size:13px;line-height:1.6;">Yang bertanda tangan di bawah ini, Lurah Watang Soreang Kecamatan Soreang Kota Parepare, dengan ini menerangkan bahwa:</p>
     <table style="width:100%;font-size:13px;margin:10px 0;">
       <tr><td style="width:170px;padding:3px 0;">Nama Lengkap</td><td style="width:14px;">:</td><td style="font-weight:700;">${(d.nama||'-').toUpperCase()}</td></tr>
@@ -1556,7 +1643,7 @@ function renderPreviewPanel(){
       </div>
     </div>
     <div class="doc-title">${item.jenis.toUpperCase()}</div>
-    <div class="doc-num">Nomor: ${docNumber(item.id)}</div>
+    <div class="doc-num">Nomor: ${item.noSurat || docNumber(item.id)}</div>
     <p>Yang bertanda tangan di bawah ini, Lurah Watang Soreang Kecamatan Soreang Kota Parepare, dengan ini menerangkan bahwa:</p>
     <div class="doc-field"><span>Nama Lengkap</span><span>:</span><b>${item.nama.toUpperCase()}</b></div>
     <div class="doc-field"><span>NIK</span><span>:</span><span>${item.nik}</span></div>
@@ -1709,6 +1796,8 @@ async function fetchStafQueue(){
     jenis: row.jenis_surat?.nama || row.jenis_surat_id,
     masuk: new Date(row.created_at).toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'})+' WITA',
     berkas: Array.isArray(row.data?.berkas) ? row.data.berkas.length : 0,
+    berkasPaths: Array.isArray(row.data?.berkas) ? row.data.berkas : [],
+    noSurat: row.data?.no_surat || '',
     nik: row.data?.nik || '-', ttl: row.data?.ttl || '-', jk: row.data?.jk || '-',
     agama: row.data?.agama || '-', sk: row.data?.status_nikah || '-', alamat: row.data?.alamat || '-'
   }));
@@ -1735,6 +1824,15 @@ async function fetchStafRiwayat(){
 
 function stafDocNumber(id){
   return `474.2/${String(id).replace(/-/g,'').slice(0,3).toUpperCase()}/KEL-WS/VI/2026`;
+}
+
+async function viewBerkas(path){
+  const {data, error} = await sb.storage.from('berkas-persyaratan').createSignedUrl(path, 300);
+  if(error || !data){
+    showStafToast('Gagal membuka berkas: '+(error?.message || 'file tidak ditemukan.'));
+    return;
+  }
+  window.open(data.signedUrl, '_blank');
 }
 
 async function renderStafAll(){
@@ -1787,6 +1885,8 @@ function renderStafPreview(){
   const spJenis=document.getElementById('stafSpJenis');
   const spBerkas=document.getElementById('stafSpBerkas');
   const docPreview=document.getElementById('stafDocPreview');
+  const berkasList=document.getElementById('stafBerkasList');
+  const nomorInput=document.getElementById('stafNomorSurat');
   const btnVerifikasi=document.getElementById('btnVerifikasi');
   const btnKembalikan=document.getElementById('btnKembalikanWarga');
 
@@ -1794,6 +1894,8 @@ function renderStafPreview(){
     previewName.textContent='—'; panelName.textContent='—';
     spNama.textContent='—'; spJenis.textContent='—'; spBerkas.textContent='—';
     docPreview.innerHTML='<p style="color:#7A8AA0;">Tidak ada permohonan dalam antrian.</p>';
+    berkasList.innerHTML='';
+    nomorInput.value='';
     btnVerifikasi.disabled=true; btnKembalikan.disabled=true;
     return;
   }
@@ -1803,6 +1905,21 @@ function renderStafPreview(){
   spNama.textContent=item.nama;
   spJenis.textContent=item.jenis;
   spBerkas.textContent=item.berkas+' file diunggah';
+  nomorInput.value = item.noSurat || stafDocNumber(item.id);
+
+  berkasList.innerHTML='';
+  if(item.berkasPaths.length===0){
+    berkasList.innerHTML='<span style="font-size:12.5px;color:#B4232C;">⚠️ Tidak ada berkas terlampir.</span>';
+  } else {
+    item.berkasPaths.forEach(path=>{
+      const btn=document.createElement('button');
+      btn.type='button';
+      btn.className='btn-mini outline';
+      btn.textContent='📄 '+path.split('/').pop();
+      btn.addEventListener('click', ()=>viewBerkas(path));
+      berkasList.appendChild(btn);
+    });
+  }
 
   docPreview.innerHTML=`
     <div class="letterhead">
@@ -1845,8 +1962,20 @@ function showStafToast(msg){
 document.getElementById('btnVerifikasi').addEventListener('click', async ()=>{
   const item = stafQueue.find(q=>q.id===selectedStafId);
   if(!item || !currentUser) return;
+  const nomorSurat = document.getElementById('stafNomorSurat').value.trim();
+  if(!nomorSurat){
+    showStafToast('⚠️ Isi Nomor Surat terlebih dahulu sebelum meneruskan ke Kepala Lurah.');
+    return;
+  }
+  if(item.berkasPaths.length===0){
+    if(!confirm('Berkas belum terlampir untuk permohonan ini. Tetap verifikasi?')) return;
+  }
   const {error} = await sb.from('pengajuan').update({
-    status:'siap_ttd', diverifikasi_oleh: currentUser.id, diverifikasi_at: new Date().toISOString()
+    status:'siap_ttd', diverifikasi_oleh: currentUser.id, diverifikasi_at: new Date().toISOString(),
+    data: {
+      nama: item.nama, nik: item.nik, ttl: item.ttl, jk: item.jk, agama: item.agama,
+      status_nikah: item.sk, alamat: item.alamat, berkas: item.berkasPaths, no_surat: nomorSurat
+    }
   }).eq('id', item.id);
   if(error){ showStafToast('Gagal memverifikasi: '+error.message); return; }
   showStafToast(`✅ Berkas ${item.jenis} a.n. ${item.nama} lengkap dan diteruskan ke antrian TTE Kepala Lurah.`);
