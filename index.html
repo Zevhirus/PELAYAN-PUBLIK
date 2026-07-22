@@ -999,7 +999,9 @@
 // ---------- Supabase client ----------
 const SUPABASE_URL = 'https://dqjoldipdnxzvkkcvavl.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_D4pGeZU83wVbUIcB_mzWig_aI4x9Bu1';
-const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
+  global: { fetch: (url, options={}) => fetch(url, {...options, cache: 'no-store'}) }
+});
 let currentUser = null;
 let currentProfile = null;
 
