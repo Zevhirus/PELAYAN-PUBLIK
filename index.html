@@ -1601,22 +1601,42 @@ async function downloadSuratPDF(row){
       <tr><td style="padding:3px 0;">Status Perkawinan</td><td>:</td><td>${d.status_nikah||'-'}</td></tr>
     </table>
     <p style="font-size:13px;line-height:1.6;margin-top:12px;">${jenisPurpose[row.jenis_surat_id] || 'Surat keterangan ini diberikan untuk keperluan administrasi sebagaimana mestinya.'}</p>
-    <p style="font-size:13px;margin-top:28px;">Parepare, ${tglTtd}<br><b>Lurah Watang Soreang,</b></p>
-    <div style="margin-top:10px;border:1.5px solid #0B2A55;border-radius:8px;padding:10px 14px;display:inline-block;">
-      <div style="font-size:11px;font-weight:700;color:#0B2A55;">✅ TANDA TANGAN ELEKTRONIK</div>
-      <div style="font-size:13px;font-weight:700;margin-top:2px;">RESKIANTI, S.Sos</div>
-      <div style="font-size:10px;color:#7A8AA0;">Penata Tk. I / III.d</div>
-      <div style="font-size:10px;color:#7A8AA0;">NIP. 19830724 201001 2 013</div>
-      <div style="font-size:10px;color:#7A8AA0;">Hash: ${docNumber(row.id).replace(/\W/g,'').slice(-8).toUpperCase()}-TTE-SPBE-2026</div>
-      <div style="font-size:10px;color:#7A8AA0;">🔒 Terverifikasi SPBE Kota Parepare</div>
+    <div style="text-align:right;margin-top:28px;">
+      <p style="font-size:13px;margin:0;">Parepare, ${tglTtd}<br><b>Lurah Watang Soreang,</b></p>
+      <div style="margin-top:10px;border:1.5px solid #0B2A55;border-radius:8px;padding:10px 14px;display:inline-block;text-align:left;">
+        <div style="font-size:11px;font-weight:700;color:#0B2A55;">✅ TANDA TANGAN ELEKTRONIK</div>
+        <img id="pdfSigImg" alt="Tanda tangan" style="max-height:48px;display:none;margin:4px 0;">
+        <div style="font-size:13px;font-weight:700;margin-top:2px;">RESKIANTI, S.Sos</div>
+        <div style="font-size:10px;color:#7A8AA0;">Penata Tk. I / III.d</div>
+        <div style="font-size:10px;color:#7A8AA0;">NIP. 19830724 201001 2 013</div>
+        <div style="font-size:10px;color:#7A8AA0;">Hash: ${docNumber(row.id).replace(/\W/g,'').slice(-8).toUpperCase()}-TTE-SPBE-2026</div>
+        <div style="font-size:10px;color:#7A8AA0;">🔒 Terverifikasi SPBE Kota Parepare</div>
+      </div>
     </div>
   `;
   document.body.appendChild(container);
+
+  // ambil gambar tanda tangan asli Lurah yang menandatangani, lalu tunggu sampai benar-benar termuat
+  if(row.ditandatangani_oleh){
+    try{
+      const {data:sig} = await sb.storage.from('ttd-resmi').createSignedUrl(`${row.ditandatangani_oleh}/tanda-tangan.png`, 300);
+      if(sig?.signedUrl){
+        const img = document.getElementById('pdfSigImg');
+        await new Promise(resolve=>{
+          img.onload = resolve;
+          img.onerror = resolve;
+          img.src = sig.signedUrl;
+          img.style.display = 'block';
+        });
+      }
+    }catch(e){ console.warn('Gagal memuat tanda tangan asli, pakai stempel teks.', e); }
+  }
+
   try{
     await html2pdf().set({
       margin:0,
       filename:`${jenisNama.replace(/\s+/g,'_')}_${(d.nama||'surat').replace(/\s+/g,'_')}.pdf`,
-      html2canvas:{scale:2},
+      html2canvas:{scale:2, useCORS:true},
       jsPDF:{unit:'pt',format:'a4',orientation:'portrait'}
     }).from(container).save();
   } finally {
@@ -1673,12 +1693,20 @@ function renderPreviewPanel(){
     <p style="margin-top:10px;">Parepare, 26 Juni 2026<br><b>Lurah Watang Soreang,</b></p>
     <div class="sign-box">
       <div class="st">✅ TANDA TANGAN ELEKTRONIK</div>
+      <img id="signPreviewImg" alt="Tanda tangan" style="max-height:52px;display:none;margin:4px 0;">
       <div class="who">RESKIANTI, S.Sos</div>
       <div class="meta">Penata Tk. I / III.d</div>
       <div class="meta">NIP. 19830724 201001 2 013</div>
       <div class="meta">Hash: A3F6-92BC-TTE-SPBE-2026</div>
       <div class="meta">🔒 Terverifikasi SPBE Kota Parepare</div>
     </div>`;
+
+  if(currentUser){
+    sb.storage.from('ttd-resmi').createSignedUrl(`${currentUser.id}/tanda-tangan.png`, 120).then(({data:sig})=>{
+      const img = document.getElementById('signPreviewImg');
+      if(img && sig?.signedUrl){ img.src = sig.signedUrl; img.style.display='block'; }
+    });
+  }
 }
 
 function renderRiwayatHariIni(){
